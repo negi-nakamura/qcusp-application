@@ -7,6 +7,7 @@ import activitiesRoutes from "./routes/activities.js";
 import calendarRoutes from "./routes/calendar.js";
 import postRoutes from "./routes/posts.js"
 import courseRoutes from "./routes/course.js"
+import gradeRoutes from "./routes/grade.js"
 
 dotenv.config();
 
@@ -33,6 +34,8 @@ app.use("/api", calendarRoutes);
 app.use("/api", postRoutes);
 
 app.use("/api", courseRoutes);
+
+app.use("/api", gradeRoutes)
 
 app.listen(port, "0.0.0.0", () => {
 	console.log(`Server is running on port ${port}`);

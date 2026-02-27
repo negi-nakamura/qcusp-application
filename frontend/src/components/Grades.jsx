@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Icon } from "@iconify/react";
 
 const reportData = [
@@ -145,6 +147,85 @@ const reportData = [
 
 function Grades() {
 
+	const [grade, setGrade] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
+
+	const limit = 5;
+	const year = "1st Year";
+	const semester = "1st Semester";
+
+	useEffect(() => {
+		const fetchGrades = async () => {
+			try {
+				setLoading(true);
+				setError(null);
+
+				const params = { limit };
+				if (year) params.year = year;
+				if (semester) params.semester = semester;
+
+				const response = await axios.get("/api/grades", { params });
+				const data = response.data;
+
+				const transformed = data.reports.map((report) => ({
+					id: report.id,
+					title: report.title,
+					course: report.course,
+					campus: report.campus,
+					yearLevel: report.yearLevel,
+					dateSubmitted: report.dateSubmitted,
+					schoolYear: report.schoolYear,	
+					semester: report.semester,
+					grades: report.grades.map((g) => ({
+						description: g.description,
+						code: g.code,
+						unit: g.unit,
+						grade: g.grade,
+						remarks: g.remarks,
+						professor: g.professor
+					})),
+					totalUnits: report.totalUnits,
+					gwa: report.gwa,
+					overallRemarks: report.overallRemarks
+				}));
+
+				setGrade(transformed);
+				console.log(transformed)
+
+			} catch (err) {
+				console.error("Failed to fetch grades:", err);
+				setError("Failed to load grades");
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchGrades();
+	}, [limit, year, semester]);
+
+	if (loading) {
+		return (
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
+			<div className="flex justify-center items-center h-64 text-gray-500">
+			Loading grades...
+			</div>
+		</div>
+		);
+	}
+
+	if (error) {
+		return (
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
+			<div className="flex justify-center items-center h-64 text-red-500">
+			{error}
+			</div>
+		</div>
+		);
+	}
+
+	if (grade.length === 0) return null;
+
 	return ( 
 		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px]">
 
@@ -161,7 +242,7 @@ function Grades() {
 				</h1>
 			</div>
 
-			{ reportData.map((report, idx) => {
+			{ grade.map((report, idx) => {
 
 				return (
 
