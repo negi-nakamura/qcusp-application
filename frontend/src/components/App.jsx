@@ -13,8 +13,6 @@ import Dashboard from "./Dashboard";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
-//axios.defaults.baseURL = "https://qcuspbackend.vercel.app"
-//axios.defaults.baseURL = "http://192.168.111.15:5000";
 
 function App() {
 	return (

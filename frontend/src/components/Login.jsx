@@ -44,14 +44,14 @@ function Login({setUser}) {
 		<div className="flex w-full min-h-screen items-center h-full justify-center">
 
 			<div className="absolute inset-0 -z-10">
-				<img src="src/assets/qcu_background.jpg" alt="QCU Logo" className="w-full min-h-screen h-full object-cover" />
+				<img src="/qcu_background.jpg" alt="QCU Logo" className="w-full min-h-screen h-full object-cover" />
 			</div>
 
 			<div className="absolute inset-0 -z-10 min-h-screen h-full bg-[rgba(255,255,255,0.01)] backdrop-blur-[5px]"></div>
 
 			<div className="w-full max-w-92.5 -mt-20 sm:mt-0 pt-8 pb-5 px-8 space-y-6 bg-[rgba(243,243,255,0.9)] backdrop-blur-[3px] rounded shadow">
 
-				<img src="src/assets/qcu_logo.png" alt="QCU Logo" className="w-24 h-24 mx-auto" />
+				<img src="/qcu_logo.png" alt="QCU Logo" className="w-24 h-24 mx-auto" />
 
 				<div className="space-y-2">
 					<h2 className="text-2xl font-semibold text-center">Quezon City University Student Portal</h2>

@@ -55,7 +55,7 @@ function Header({ setUser }) {
 			<div className="flex gap-8">
 				<NavLink to="/">
 					<img
-						src="/src/assets/qcu_logo.png"
+						src="/qcu_logo.png"
 						alt="Quezon City University Logo"
 						className="w-10"
 					/>
@@ -86,10 +86,10 @@ function Header({ setUser }) {
 			</div>
 
 			{/* Right Section */}
-			<div className="flex gap-5 items-center">
+			<div className="flex gap-5 items-center select-none">
 				<div className="flex items-center mr-10 md:mr-0 relative cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
 					<div className="overflow-hidden rounded-full border border-white w-8">
-						<img src="/src/assets/default_profile.jpg" alt="Default Profile"/>
+						<img src="/default_profile.jpg" alt="Default Profile"/>
 					</div>
 					<Icon icon={dropdownOpen ? "iconamoon:arrow-up-2" : "iconamoon:arrow-down-2"} width={24} height={24} className="text-white"/>
 					<Account logout={logout} dropdownOpen={dropdownOpen} />
@@ -98,7 +98,7 @@ function Header({ setUser }) {
 
 			{/* Mobile Hamburger */}
 			<button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-3.5 right-5 z-50 md:hidden">
-				<img src={ menuOpen ? "/src/assets/hamburger_close.svg" : "/src/assets/hamburger_menu.svg" } alt="Menu" width={32} height={32}/>
+				<img src={ menuOpen ? "/hamburger_close.svg" : "/hamburger_menu.svg" } alt="Menu" width={32} height={32}/>
 			</button>
 
 			{/* Mobile Sidebar */}

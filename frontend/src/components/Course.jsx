@@ -102,7 +102,7 @@ function Course() {
 					<div className="w-full h-20 sm:h-30 rounded-md overflow-hidden mb-3 relative">
 						<span className="text-sm text-blue-600 bg-blue-50 border font-bold border-blue-200 px-2 py-1 rounded absolute top-3 left-3">{course.code}</span>
 						<img
-							src={`/src/assets/course_bg_${course.bg}.jpg`}
+							src={`/course_bg_${course.bg}.jpg`}
 							alt="Course Background"
 							className="w-full h-full object-cover"
 						/>

@@ -88,7 +88,7 @@ function CoursePreview() {
 							{course.code}
 						</span>
 						<img
-							src={`/src/assets/course_bg_${course.bg}.jpg`}
+							src={`/course_bg_${course.bg}.jpg`}
 							alt="Course Background"
 							className="w-full h-full object-cover"
 						/>
