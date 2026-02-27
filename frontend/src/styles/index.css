@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+    font-family: 'Montserrat', sans-serif;
+}
+
+@theme {
+
+    --color-primary-50: #E5F3FF;
+    --color-primary-100: #B0C8DF;
+    --color-primary-200: #8AAED0;
+    --color-primary-300: #5488BA;
+    --color-primary-400: #3371AD;
+    --color-primary-500: #004E98;
+    --color-primary-600: #00478A;
+    --color-primary-700: #00376C;
+    --color-primary-800: #002B54;
+    --color-primary-900: #002140;
+
+    --color-accent-100: #FFE1CC;
+    --color-accent-200: #FFC299;
+    --color-accent-300: #FFA466;
+    --color-accent-400: #FF8533;
+    --color-accent-500: #FF6700;
+    --color-accent-600: #CC5200;
+    --color-accent-700: #993E00;
+    --color-accent-800: #662900;
+    --color-accent-900: #331500;
+
+    --color-neutral-50: #F3F3FF;
+    --color-neutral-100: #C6C6D1;
+    --color-neutral-200: #ABABBA;
+    --color-neutral-300: #84849B;
+    --color-neutral-400: #6D6D88;
+    --color-neutral-500: #48486A;
+    --color-neutral-600: #424260;
+    --color-neutral-700: #33334B;
+    --color-neutral-800: #28283A;
+    --color-neutral-900: #1E1E2D;
+
+    --color-success-100: #C2FFFA;
+    --color-success-200: #85FFF5;
+    --color-success-300: #47FFF0;
+    --color-success-400: #0AFFEB;
+    --color-success-500: #00CCBB;
+    --color-success-600: #00A396;
+    --color-success-700: #007A70;
+    --color-success-800: #00524B;
+    --color-success-900: #002925;
+
+    --color-warning-100: #FFEED6;
+    --color-warning-200: #FFDAA9;
+    --color-warning-300: #FEC980;
+    --color-warning-400: #FEB857;
+    --color-warning-500: #FEA62D;
+    --color-warning-600: #EF8B01;
+    --color-warning-700: #B26701;
+    --color-warning-800: #754401;
+    --color-warning-900: #3D2300;
+
+    --color-error-100: #FEBFD7;
+    --color-error-200: #FEA0C4;
+    --color-error-300: #FE75A9;
+    --color-error-400: #FD5A98;
+    --color-error-500: #FD317E;
+    --color-error-600: #E62D73;
+    --color-error-700: #B42359;
+    --color-error-800: #8B1B45;
+    --color-error-900: #6A1535;
+
+}
