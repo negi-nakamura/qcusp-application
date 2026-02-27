@@ -8,10 +8,6 @@ function Grades() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	const limit = 5;
-	const year = "1st Year";
-	const semester = "1st Semester";
-
 	useEffect(() => {
 		const fetchGrades = async () => {
 		try {

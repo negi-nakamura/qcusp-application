@@ -7,6 +7,7 @@ import activitiesRoutes from "../routes/activities.js";
 import calendarRoutes from "../routes/calendar.js";
 import postRoutes from "../routes/posts.js"
 import courseRoutes from "../routes/course.js"
+import gradeRoutes from "../routes/grade.js"
 
 dotenv.config();
 
@@ -32,5 +33,7 @@ app.use("/api", calendarRoutes);
 app.use("/api", postRoutes);
 
 app.use("/api", courseRoutes);
+
+app.use("/api", gradeRoutes)
 
 export default app;
