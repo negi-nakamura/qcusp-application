@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import LoginActivity from "./LoginActivity";
 import CoursePreview from "./CoursePreview";
 import CalendarPreview from "./CalendarPreview";
+import GradePreview from "./GradePreview"
 import { NavLink } from "react-router-dom";
 
 const student = {
@@ -64,78 +65,7 @@ function Dashboard() {
 						</div>
 					</NavLink>
 
-					<div className="flex flex-col w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
-						<section className="bg-white shadow-sm hover:shadow-md transition  items-start">
-							
-							{/* Header */}
-							<div className="flex items-center justify-center bg-primary-500 text-white px-4 py-2.5">
-								<span className="text-xs sm:text-base font-semibold text-center">
-									1st Year Final Grade Report for S.Y. 2025-2026
-								</span>
-							</div>
-
-							{/* Summary Body */}
-							<div className="grid grid-cols-2 gap-3 sm:gap-4 px-3 sm:px-4 py-3 text-[11px] sm:text-sm">
-
-								{/* Left Column */}
-								<div className="space-y-2 sm:space-y-3">
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">Program</p>
-										<p className="font-medium text-gray-800 text-[11px] sm:text-sm">
-											BS Information Technology
-										</p>
-									</div>
-
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">Campus</p>
-										<p className="font-medium text-gray-800 text-[11px] sm:text-sm">
-											San Bartolome Campus
-										</p>
-									</div>
-
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">Total Units</p>
-										<p className="font-medium text-gray-800 text-[11px] sm:text-sm">
-											36 Units
-										</p>
-									</div>
-								</div>
-
-								{/* Right Column */}
-								<div className="space-y-2 sm:space-y-3">
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">
-											General Weighted Average
-										</p>
-										<p className="font-semibold text-primary-600 text-[12px] sm:text-sm">
-											1.75
-										</p>
-									</div>
-
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">Remarks</p>
-										<p className="font-semibold text-green-600 text-[11px] sm:text-sm">
-											PASSED
-										</p>
-									</div>
-
-									<div>
-										<p className="text-gray-500 text-[10px] sm:text-xs">Academic Status</p>
-										<p className="font-medium text-gray-800 text-[11px] sm:text-sm">
-											Regular Student
-										</p>
-									</div>
-								</div>
-
-							</div>
-
-							{/* Footer */}
-							<div className="border-t px-3 sm:px-4 py-2 bg-gray-100 flex justify-between items-center text-[12px] sm:text-xs text-gray-500">
-								<span>Submitted on April 20, 2026</span>
-							</div>
-
-						</section>
-					</div>
+					<GradePreview/>
 
 				</section>
 
