@@ -12,9 +12,9 @@ import Spinner from "./Spinner";
 import Dashboard from "./Dashboard";
 
 axios.defaults.withCredentials = true;
-//axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "http://192.168.111.15:5000";
-//axios.defaults.baseURL = "http://10.240.153.186:5000";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
+//axios.defaults.baseURL = "https://qcuspbackend.vercel.app"
+//axios.defaults.baseURL = "http://192.168.111.15:5000";
 
 function App() {
 	return (
