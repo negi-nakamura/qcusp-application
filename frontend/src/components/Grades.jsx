@@ -2,149 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 
-const reportData = [
-  {
-    title: "1st Year Final Grade Report for S.Y. 2025-2026",
-    course: "Bachelor of Science in Information and Technology",
-    campus: "Batasan Hills, Quezon City",
-    yearLevel: "1st Year (Freshman)",
-    dateSubmitted: "January 10, 2026 | 09:30 AM",
-    schoolYear: "2025 - 2026",
-    semester: "1st (Finals)",
-    grades: [
-      {
-        description: "Fundamentals of Programming",
-        code: "CC 102",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Olayson, Joel M.",
-      },
-      {
-        description: "Introduction to Computing",
-        code: "CC 101",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Carlo, Romero A.",
-      },
-      {
-        description: "National Service Training Program 1",
-        code: "NSTP 1",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Junio, Alvin B.",
-      },
-      {
-        description: "Physical Activities Towards Health and Fitness 1",
-        code: "PATHFIT 1",
-        unit: 2,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Vinluan, Anthony R.",
-      },
-      {
-        description: "The Contemporary World",
-        code: "SOCSCI 1",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Suyat, Arcadil C.",
-      },
-      {
-        description: "The Life and Works of Rizal",
-        code: "RIZAL",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Cruz, Raymond L.",
-      },
-      {
-        description: "Web Systems and Technologies 1",
-        code: "WS 101",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Cagolilan, Noel C.",
-      },
-    ],
-    totalUnits: 23,
-    gwa: 1.5,
-    overallRemarks: "PASSED",
-  },
-  {
-    title: "1st Year Midterm Grade Report for S.Y. 2025-2026",
-    course: "Bachelor of Science in Information and Technology",
-    campus: "Batasan Hills, Quezon City",
-    yearLevel: "1st Year (Freshman)",
-    dateSubmitted: "January 10, 2026 | 09:30 AM",
-    schoolYear: "2025 - 2026",
-    semester: "1st (Midterm)",
-    grades: [
-      {
-        description: "Fundamentals of Programming",
-        code: "CC 102",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Olayson, Joel M.",
-      },
-      {
-        description: "Introduction to Computing",
-        code: "CC 101",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Carlo, Romero A.",
-      },
-      {
-        description: "National Service Training Program 1",
-        code: "NSTP 1",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Junio, Alvin B.",
-      },
-      {
-        description: "Physical Activities Towards Health and Fitness 1",
-        code: "PATHFIT 1",
-        unit: 2,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Vinluan, Anthony R.",
-      },
-      {
-        description: "The Contemporary World",
-        code: "SOCSCI 1",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Suyat, Arcadil C.",
-      },
-      {
-        description: "The Life and Works of Rizal",
-        code: "RIZAL",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Cruz, Raymond L.",
-      },
-      {
-        description: "Web Systems and Technologies 1",
-        code: "WS 101",
-        unit: 3,
-        grade: 1.5,
-        remarks: "PASSED",
-        professor: "Cagolilan, Noel C.",
-      },
-    ],
-    totalUnits: 23,
-    gwa: 1.5,
-    overallRemarks: "PASSED",
-  },
-];
-
 function Grades() {
 
 	const [grade, setGrade] = useState([]);
@@ -157,52 +14,48 @@ function Grades() {
 
 	useEffect(() => {
 		const fetchGrades = async () => {
-			try {
-				setLoading(true);
-				setError(null);
+		try {
+			setLoading(true);
+			setError(null);
 
-				const params = { limit };
-				if (year) params.year = year;
-				if (semester) params.semester = semester;
+			const response = await axios.get("/api/grades");
+			const data = response.data;
 
-				const response = await axios.get("/api/grades", { params });
-				const data = response.data;
+			const transformed = data.reports.map((report) => ({
+			id: report.id,
+			title: report.title,
+			course: report.course,
+			campus: report.campus,
+			yearLevel: report.yearLevel,
+			dateSubmitted: report.dateSubmitted,
+			schoolYear: report.schoolYear,
+			semester: report.semester,
+			grades: report.grades.map((g) => ({
+				description: g.description,
+				code: g.code,
+				unit: g.unit,
+				grade: g.grade,
+				remarks: g.remarks,
+				professor: g.professor
+			})),
+			totalUnits: report.totalUnits,
+			gwa: report.gwa,
+			overallRemarks: report.overallRemarks
+			}));
 
-				const transformed = data.reports.map((report) => ({
-					id: report.id,
-					title: report.title,
-					course: report.course,
-					campus: report.campus,
-					yearLevel: report.yearLevel,
-					dateSubmitted: report.dateSubmitted,
-					schoolYear: report.schoolYear,	
-					semester: report.semester,
-					grades: report.grades.map((g) => ({
-						description: g.description,
-						code: g.code,
-						unit: g.unit,
-						grade: g.grade,
-						remarks: g.remarks,
-						professor: g.professor
-					})),
-					totalUnits: report.totalUnits,
-					gwa: report.gwa,
-					overallRemarks: report.overallRemarks
-				}));
+			setGrade(transformed);
+			console.log(transformed);
 
-				setGrade(transformed);
-				console.log(transformed)
-
-			} catch (err) {
-				console.error("Failed to fetch grades:", err);
-				setError("Failed to load grades");
-			} finally {
-				setLoading(false);
-			}
+		} catch (err) {
+			console.error("Failed to fetch grades:", err);
+			setError("Failed to load grades");
+		} finally {
+			setLoading(false);
+		}
 		};
 
 		fetchGrades();
-	}, [limit, year, semester]);
+	}, []);
 
 	if (loading) {
 		return (
