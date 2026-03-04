@@ -68,18 +68,18 @@ function Grades() {
 	if (grade.length === 0) return null;
 
 	return ( 
-		<div className="flex flex-col w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
-			<section className="bg-white shadow-sm hover:shadow-md transition  items-start">
+		<div className="flex flex-col w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg h-full ">
+			<section className="bg-white shadow-sm hover:shadow-md transition  h-full flex flex-col max-h-[300px]">
 				
 				{/* Header */}
-				<div className="flex items-center justify-center bg-primary-500 text-white px-4 py-2.5">
-					<span className="text-xs sm:text-base font-semibold text-center">
+				<div className="flex flex-1 items-center justify-center bg-primary-500 text-white px-4 py-2.5 ">
+					<span className="text-xs sm:text-base font-semibold text-center wrap-break-word">
 						{grade.title}
 					</span>
 				</div>
 
 				{/* Summary Body */}
-				<div className="grid grid-cols-2 gap-3 sm:gap-4 px-3 sm:px-4 py-3 text-[11px] sm:text-sm">
+				<div className="grid grid-cols-2 gap-3 sm:gap-4 px-3 sm:px-4 py-3 text-[11px] sm:text-sm flex-1">
 
 					{/* Left Column */}
 					<div className="space-y-2 sm:space-y-3">
@@ -134,7 +134,7 @@ function Grades() {
 				</div>
 
 				{/* Footer */}
-				<div className="border-t px-3 sm:px-4 py-2 bg-gray-100 flex justify-between items-center text-[12px] sm:text-xs text-gray-500">
+				<div className="border-t px-3 sm:px-4 py-2 bg-gray-100 flex justify-between items-center text-[12px] sm:text-xs text-gray-500 flex-1">
 					<span>Submitted on {grade.dateSubmitted}</span>
 				</div>
 

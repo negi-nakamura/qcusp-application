@@ -76,7 +76,7 @@ function Grades() {
 	if (grade.length === 0) return null;
 
 	return ( 
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px]">
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] h-f">
 
 			{/* Title */}
 			<div className="mb-2 sm:mb-4">

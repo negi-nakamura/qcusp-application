@@ -9,6 +9,7 @@ const router = express.Router();
 router.get("/activities", authenticateToken, async (req, res) => {
 	try {
 		const userId = req.user.id;
+		const limit = parseInt(req.query.limit) || 10;
 
 		const result = await pool.query(`
 			SELECT 
@@ -18,12 +19,15 @@ router.get("/activities", authenticateToken, async (req, res) => {
 				ua.activity_time,
 				s.user_agent,
 				s.ip_address,
-				s.country
+				s.country,
+				s.region,
+				s.city
 			FROM user_activities ua
 			JOIN sessions s ON s.id = ua.session_id
 			WHERE s.user_id = $1
-			ORDER BY ua.activity_time DESC`, 
-			[userId]
+			ORDER BY ua.activity_time DESC
+			LIMIT $2`, 
+			[userId, limit]
 		);
 
 		const activities = result.rows.map(act => {
@@ -51,9 +55,12 @@ router.get("/activities", authenticateToken, async (req, res) => {
 				type: act.activity_type,
 				ip_address: act.ip_address,
 				country: act.country,
+				region: act.region,
+				city: act.city,
 				weekday: formattedDate.weekday,
 				date: formattedDate.date,
 				time: formattedDate.time,
+				formattedDate: formattedDate.formatted,
 				device,
 				browser,
 				os
