@@ -117,8 +117,8 @@ router.post("/login", async (req, res) => {
 		);
 	} else {
 		const newSession = await pool.query(
-			"INSERT INTO sessions (user_id, ip_address, user_agent) VALUES ($1, $2, $3) RETURNING id",
-			[user.id, req.ip, req.headers["user-agent"]]
+			"INSERT INTO sessions (user_id, ip_address, user_agent, country, region, city) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+			[user.id, ip, userAgent, country, region, city]
 		);
 
 		sessionId = newSession.rows[0].id;
