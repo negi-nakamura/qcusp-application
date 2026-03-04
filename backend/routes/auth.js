@@ -80,10 +80,7 @@ router.post("/login", async (req, res) => {
 	const validPassword = await bcrypt.compare(password, user.password);
 	if (!validPassword) return res.status(400).json({ message: "Invalid credentials" });
 
-	const ip =
-		req.headers["x-forwarded-for"]?.split(",")[0] ||
-		req.socket.remoteAddress ||
-		req.ip;
+	const ip = req.ip?.replace("::ffff:", "") || null;
 
 	const userAgent = req.headers["user-agent"];
 
@@ -92,8 +89,6 @@ router.post("/login", async (req, res) => {
 	const country = geo?.country || null;
 	const region = geo?.region || null;
 	const city = geo?.city || null;
-	const latitude = geo?.ll?.[0] || null;
-	const longitude = geo?.ll?.[1] || null;
 
 	let activeSessionQuery = await pool.query(`
 		SELECT s.id
