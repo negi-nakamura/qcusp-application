@@ -16,7 +16,9 @@ router.get("/activities", authenticateToken, async (req, res) => {
 				ua.session_id,
 				ua.activity_type,
 				ua.activity_time,
-				s.user_agent
+				s.user_agent,
+				s.ip_address,
+				s.country
 			FROM user_activities ua
 			JOIN sessions s ON s.id = ua.session_id
 			WHERE s.user_id = $1
@@ -47,6 +49,8 @@ router.get("/activities", authenticateToken, async (req, res) => {
 				id: act.id,
 				session_id: act.session_id,
 				type: act.activity_type,
+				ip_address: act.ip_address,
+				country: act.country,
 				weekday: formattedDate.weekday,
 				date: formattedDate.date,
 				time: formattedDate.time,

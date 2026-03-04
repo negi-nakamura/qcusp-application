@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import pool from "../config/db.js";
 import { authenticateToken } from "../middleware/auth.js";
 import { formatDateToObject } from "../utils/dateFormatter.js";
+import geoip from "geoip-lite";
 
 const router = express.Router();
 
@@ -79,6 +80,21 @@ router.post("/login", async (req, res) => {
 	const validPassword = await bcrypt.compare(password, user.password);
 	if (!validPassword) return res.status(400).json({ message: "Invalid credentials" });
 
+	const ip =
+		req.headers["x-forwarded-for"]?.split(",")[0] ||
+		req.socket.remoteAddress ||
+		req.ip;
+
+	const userAgent = req.headers["user-agent"];
+
+	const geo = geoip.lookup(ip);
+
+	const country = geo?.country || null;
+	const region = geo?.region || null;
+	const city = geo?.city || null;
+	const latitude = geo?.ll?.[0] || null;
+	const longitude = geo?.ll?.[1] || null;
+
 	let activeSessionQuery = await pool.query(`
 		SELECT s.id
 		FROM sessions s
@@ -87,7 +103,7 @@ router.post("/login", async (req, res) => {
 		WHERE s.user_id = $1 AND s.ip_address = $2 AND s.user_agent = $3
 		GROUP BY s.id
 		HAVING COUNT(ua.id) = 0`,
-		[user.id, req.ip, req.headers["user-agent"]]
+		[user.id, ip, req.headers["user-agent"]]
 	);
 
 	let sessionId;
