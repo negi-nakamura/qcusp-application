@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import pool from "../config/db.js";
 import { authenticateToken } from "../middleware/auth.js";
 import { formatDateToObject } from "../utils/dateFormatter.js";
-import geoip from "geoip-lite";
+import axios from "axios"
 
 const router = express.Router();
 
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
 
 	const user = userQuery.rows[0];
 	const validPassword = await bcrypt.compare(password, user.password);
-	
+
 	if (!validPassword) return res.status(400).json({ message: "Invalid credentials" });
 
 	const ip = req.ip?.replace("::ffff:", "") || null;
