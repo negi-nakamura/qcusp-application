@@ -8,6 +8,7 @@ import calendarRoutes from "./routes/calendar.js";
 import postRoutes from "./routes/posts.js"
 import courseRoutes from "./routes/course.js"
 import gradeRoutes from "./routes/grade.js"
+import path from "path";
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use(
 );
 
 app.set("trust proxy", 1);
+
+app.use("/public", express.static(path.join(process.cwd(), "public")));
 
 app.use(cookieParser());
 
