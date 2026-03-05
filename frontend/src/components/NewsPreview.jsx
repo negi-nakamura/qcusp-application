@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-export default function Carousel() {
+export default function NewsPreview() {
 	const limit = 5
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(false);

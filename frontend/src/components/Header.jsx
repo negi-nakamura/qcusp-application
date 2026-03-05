@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef  } from "react";
 import { Icon } from "@iconify/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ function Header({ setUser }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const accountRef = useRef(null);
 	const navigate = useNavigate();
 
 	const logout = async () => {
@@ -33,6 +34,20 @@ function Header({ setUser }) {
 			document.body.style.overflow = "auto";
 		};
 	}, [menuOpen]);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (accountRef.current && !accountRef.current.contains(event.target)) {
+				setDropdownOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const desktopNavClass = ({ isActive }) =>
 		`flex justify-center items-center gap-1 transition ${
@@ -87,9 +102,9 @@ function Header({ setUser }) {
 
 			{/* Right Section */}
 			<div className="flex gap-5 items-center select-none">
-				<div className="flex items-center mr-10 md:mr-0 relative cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
-					<div className="overflow-hidden rounded-full border border-white w-8">
-						<img src="/default_profile.jpg" alt="Default Profile"/>
+				<div className="flex items-center mr-10 md:mr-0 cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)} ref={accountRef}>
+					<div className="overflow-hidden rounded-full  w-8">
+						<img src="https://res.cloudinary.com/djbdsrwcz/image/upload/v1772728195/profile_1.jpg" alt="Default Profile"/>
 					</div>
 					<Icon icon={dropdownOpen ? "iconamoon:arrow-up-2" : "iconamoon:arrow-down-2"} width={24} height={24} className="text-white"/>
 					<Account logout={logout} dropdownOpen={dropdownOpen} />

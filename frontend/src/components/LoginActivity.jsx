@@ -17,12 +17,10 @@ function LoginActivity() {
 				const data = response.data;
 
 				const transformed = data.activities.map((act) => {
-				// Parse times using Luxon
 				const lastAccessDT = DateTime.fromFormat(act.last_access, "yyyy-MM-dd | hh:mm a", { zone: "Asia/Manila" });
 				const loginDT = DateTime.fromFormat(act.login_time, "yyyy-MM-dd | hh:mm a", { zone: "Asia/Manila" });
 				const now = DateTime.now().setZone("Asia/Manila");
 
-				// Determine relative last access display
 				let lastAccessDisplay;
 				const diffSeconds = now.diff(lastAccessDT, "seconds").seconds;
 
@@ -95,8 +93,8 @@ function LoginActivity() {
 			<h1 className="mb-3 sm:mb-4 font-semibold flex items-center justify-center gap-3 text-gray-800 mt-4 sm:mt-5">
 
 				<div className="flex flex-col items-center">
-					<span className="wrap-break-words text-xl sm:text-xl block sm:inline font-semibold text-primary-500">Login Activity</span>
-					<span className="wrap-break-words text-sm sm:text-base block font-normal">All recorded login sessions and account activity.</span>
+					<span className="wrap-break-words mb-1 text-xl sm:text-xl block sm:inline font-semibold text-primary-500">Account Login Activity</span>
+					<span className="wrap-break-words text-[13px] sm:text-base block font-normal text-center text-neutral-300">View all recorded login sessions and account activities related to your account.</span>
 				</div>
 
 			</h1>

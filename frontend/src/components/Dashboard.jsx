@@ -1,4 +1,4 @@
-import Carousel from "./Carousel";
+import NewsPreview from "./NewsPreview";
 import { Icon } from "@iconify/react";
 import LoginActivityPreview from "./LoginActivityPreview";
 import CoursePreview from "./CoursePreview";
@@ -42,12 +42,12 @@ function Dashboard() {
 						<Icon icon="fluent:news-20-filled" className="sm:w-6 sm:h-6 "/>
 						<span className="text-sm font-medium sm:text-base">News and Announcements</span>
 					</div>
-					<div className="flex items-center gap-1.5 text-primary-500 cursor-pointer">
+					<NavLink to="/news" className="flex items-center gap-1.5 text-primary-500 cursor-pointer">
 						<span className="text-xs font-medium sm:text-sm">View All</span>
 						<Icon icon="iconamoon:arrow-right-2-light" className="w-6 h-6"/>
-					</div>
+					</NavLink>
 				</div>
-				<Carousel />
+				<NewsPreview />
 			</div>
 
 			{/*Grades and Login*/}

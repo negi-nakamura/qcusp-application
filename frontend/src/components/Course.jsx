@@ -153,7 +153,6 @@ function Course() {
 					{/* Action Buttons */}
 					<div className="mt-auto flex flex-col md:flex-row justify-end gap-2 px-4 pb-4">
 						<button className="flex items-center justify-center gap-2 border border-gray-300 rounded-md px-4 py-2 text-gray-700 hover:bg-gray-100 transition text-sm w-full sm:w-auto">
-							<Icon icon="charm:eye" width={20} height={20} className="text-gray-700"/>
 							Preview
 						</button>
 

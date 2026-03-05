@@ -73,7 +73,7 @@ function Grades() {
 				
 				{/* Header */}
 				<div className="flex flex-1 items-center justify-center bg-primary-500 text-white px-4 py-2.5 ">
-					<span className="text-xs sm:text-base font-semibold text-center wrap-break-word">
+					<span className="text-[13px] sm:text-base font-semibold text-center wrap-break-word">
 						{grade.title}
 					</span>
 				</div>

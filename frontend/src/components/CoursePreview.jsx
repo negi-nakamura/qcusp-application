@@ -75,7 +75,7 @@ function CoursePreview() {
 	if (courses.length === 0) return null;
 
 	return (
-		<div className="grid grid-cols-2 w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
+		<div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
 
 			{courses.map((course, idx) => (
 				<div

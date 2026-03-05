@@ -1,24 +1,24 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 function Account({ logout, dropdownOpen }) {
 	return ( 
-		<section>
-			<div className="absolute right-0 mt-10 w-50 bg-neutral-50 rounded shadow-lg py-1 z-30" style={{ display: dropdownOpen ? "block" : "none" }}>
-				<Link to="/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-					<Icon icon="material-symbols:person" width={20} height={20} className="inline-block mr-2" />
+		<section className="absolute right-0 top-13.5 w-full max-w-[250px] sm:max-w-[360px] px-3 z-30" style={{ display: dropdownOpen ? "block" : "none" }}>
+			<div className="bg-neutral-50 rounded-lg shadow-[0_0_10px_rgba(0,0,5,0.25)]">
+				<NavLink to="/profile" className="flex items-center px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-100">
+					<Icon icon="material-symbols:person" width={25} height={25} className="inline-block mr-2" />
 					<span>Profile</span>
-				</Link>
+				</NavLink>
 				<hr className="border-t mx-3 text-neutral-200" />
-				<Link to="/settings" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-					<Icon icon="material-symbols:settings" width={20} height={20} className="inline-block mr-2" />
+				<NavLink to="/settings" className="flex items-center px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-100">
+					<Icon icon="material-symbols:settings" width={25} height={25} className="inline-block mr-2" />
 					<span>Setting</span>
-				</Link>
+				</NavLink>
 				<hr className="border-t mx-3 text-neutral-200" />
-				<Link className="flex items-center px-4 py-2 text-sm text-error-600 hover:bg-gray-100" onClick={logout}>
-					<Icon icon="material-symbols:logout" width={20} height={20} className="inline-block mr-2" />
+				<NavLink className="flex items-center px-4 py-3 text-base font-medium text-error-600 hover:bg-gray-100" onClick={logout}>
+					<Icon icon="material-symbols:logout" width={25} height={25} className="inline-block mr-2" />
 					<span>Logout</span>
-				</Link>
+				</NavLink>
 			</div>
 		</section>
 	);

@@ -710,12 +710,6 @@ function UniversityCalendar() {
 							aria-label="Preview calendar events"
 							type="button"
 						>
-							<Icon
-								icon="charm:eye"
-								width={18}
-								height={18}
-								className="sm:w-5 sm:h-5 text-neutral-500"
-							/>
 							<span className="text-sm sm:text-base text-neutral-500">Preview</span>
 						</button>
 
