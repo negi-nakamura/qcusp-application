@@ -17,7 +17,7 @@ function LoginActivityPreview() {
 			const data = response.data;
 
 			const transformed = data.activities.map((act) => ({
-				location: `${act.city}, ${act.country}`,
+				location: act.city ? `${act.city}, ${act.country || "Unknown"}` : "Unknown",
 				session_id: act.session_id.toString().padStart(6, "0"),
 				ip: act.ip_address,
 				os: act.os,
