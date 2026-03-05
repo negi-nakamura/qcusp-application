@@ -51,7 +51,7 @@ function Dashboard() {
 			</div>
 
 			{/*Grades and Login*/}
-			<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-7 ">
+			<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-5 sm:gap-7 ">
 
 				<section className="flex flex-col h-full">
 					<NavLink to="/grades" className="flex mb-2 justify-between items-center cursor-pointer">
@@ -86,7 +86,7 @@ function Dashboard() {
 			</div>
 
 			{/*Courses and Calendar*/}
-			<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-7"> 
+			<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-5 sm:gap-7"> 
 				
 				<section>
 					<NavLink to="/courses" className="flex mb-2 justify-between items-center cursor-pointer">

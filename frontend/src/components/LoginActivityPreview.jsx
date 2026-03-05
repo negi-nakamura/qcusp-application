@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 
-function LoginActivity() {
+function LoginActivityPreview() {
 	const [activities, setActivities] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
@@ -69,7 +69,7 @@ function LoginActivity() {
 	return (
 		<div className="flex flex-col w-full gap-2 bg-neutral-50 p-2 shadow-lg rounded-lg max-h-[300px] sm:h-full flex-2">
 			{activities.map((session, idx) => (
-				<section key={idx} className="grid grid-cols-2 gap-4gap-y-2 bg-white shadow-sm hover:shadow-md transition rounded-lg p-3 flex-1 items-center">
+				<section key={idx} className="grid grid-cols-2 gap-4 gap-y-2 bg-white shadow-sm hover:shadow-md transition rounded-lg p-3 flex-1 items-center">
 
 				{/* Column 1: Location */}
 				<div className="flex flex-col text-[12px] sm:text-sm">
@@ -102,4 +102,4 @@ function LoginActivity() {
 	);
 }
 
-export default LoginActivity;
+export default LoginActivityPreview;
