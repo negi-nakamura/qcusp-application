@@ -166,7 +166,7 @@ export default function Carousel() {
 
 							{/* IMAGE */}
 							<div className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] shrink-0 aspect-square overflow-hidden relative">
-								<img src={`${import.meta.env.VITE_API_URL}/public/posts${post.bg_url}`} alt="News Background" className="w-full h-full object-cover"/>
+								<img src={post.bg_url} alt="News Background" className="w-full h-full object-cover"/>
 							</div>
 
 							{/* CONTENT */}
