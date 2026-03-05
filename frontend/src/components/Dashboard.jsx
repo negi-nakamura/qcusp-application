@@ -1,6 +1,6 @@
 import Carousel from "./Carousel";
 import { Icon } from "@iconify/react";
-import LoginActivity from "./LoginActivity";
+import LoginActivityPreview from "./LoginActivityPreview";
 import CoursePreview from "./CoursePreview";
 import CalendarPreview from "./CalendarPreview";
 import GradePreview from "./GradePreview"
@@ -70,7 +70,7 @@ function Dashboard() {
 				</section>
 
 				<section className="flex flex-col h-full">
-					<div className="flex mb-2 justify-between items-center cursor-pointer">
+					<NavLink to="/login_activity" className="flex mb-2 justify-between items-center cursor-pointer">
 						<div className="flex items-center gap-1.5 text-neutral-800">
 							<Icon icon="material-symbols:login-rounded" className="sm:w-6 sm:h-6 "/>
 							<span className="text-sm font-medium sm:text-base">Login Activity</span>
@@ -79,8 +79,8 @@ function Dashboard() {
 							<span className="text-xs font-medium sm:text-sm">View All</span>
 							<Icon icon="iconamoon:arrow-right-2-light" className="w-6 h-6"/>
 						</div>
-					</div>
-					<LoginActivity/>
+					</NavLink>
+					<LoginActivityPreview/>
 				</section>
 
 			</div>

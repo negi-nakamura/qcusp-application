@@ -97,14 +97,12 @@ router.post("/login", async (req, res) => {
 		}
 	}
 
-	const activeSessionQuery = await pool.query(`
-		SELECT s.id
-		FROM sessions s
-		LEFT JOIN user_activities ua 
-		ON ua.session_id = s.id AND ua.activity_type = 'logout'
-		WHERE s.user_id = $1 AND s.ip_address = $2 AND s.user_agent = $3
-		GROUP BY s.id
-		HAVING COUNT(ua.id) = 0`,
+	const activeSessionQuery = await pool.query(
+		`SELECT id FROM sessions 
+		WHERE user_id = $1 
+		AND ip_address = $2 
+		AND user_agent = $3 
+		AND logout_time IS NULL`,
 		[user.id, ip, userAgent]
 	);
 
@@ -112,14 +110,21 @@ router.post("/login", async (req, res) => {
 
 	if (activeSessionQuery.rows.length > 0) {
 		sessionId = activeSessionQuery.rows[0].id;
-		await pool.query("INSERT INTO user_activities (session_id, activity_type) VALUES ($1, 'login')", [sessionId]);
+		await pool.query(
+			`UPDATE sessions 
+			SET last_access = NOW() 
+			WHERE id = $1`,
+			[sessionId]
+		);
 	} else {
 		const newSession = await pool.query(
-			"INSERT INTO sessions (user_id, ip_address, user_agent, country, region, city) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+			`INSERT INTO sessions 
+			(user_id, ip_address, user_agent, country, region, city, created_at, last_access)
+			VALUES ($1,$2,$3,$4,$5,$6,NOW(),NOW())
+			RETURNING id`,
 			[user.id, ip, userAgent, country, region, city]
 		);
 		sessionId = newSession.rows[0].id;
-		await pool.query("INSERT INTO user_activities (session_id, activity_type) VALUES ($1, 'login')", [sessionId]);
 	}
 
 	const response = {
@@ -144,7 +149,9 @@ router.post("/logout", authenticateToken, async (req, res) => {
 
 	try {
 		await pool.query(
-			"INSERT INTO user_activities (session_id, activity_type) VALUES ($1, 'logout')",
+			`UPDATE sessions 
+			SET logout_time = NOW() 
+			WHERE id = $1`,
 			[sessionId]
 		);
 
@@ -161,7 +168,9 @@ router.get("/me", authenticateToken, async (req, res) => {
 
 	try {
 		await pool.query(
-			"INSERT INTO user_activities (session_id, activity_type) VALUES ($1, 'last_access')",
+			`UPDATE sessions 
+			SET last_access = NOW() 
+			WHERE id = $1`,
 			[sessionId]
 		);
 

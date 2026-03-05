@@ -10,6 +10,7 @@ import Grades from "./Grades";
 import UniversityCalendar from "./UniversityCalendar";
 import Spinner from "./Spinner";
 import Dashboard from "./Dashboard";
+import LoginActivity from "./LoginActivity";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
@@ -25,6 +26,7 @@ function App() {
 function AppContent() {
 	const location = useLocation();
 	const isLoginPage = location.pathname === "/login";
+	const isLoginActivity = location.pathname === "/login_activity";
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -69,6 +71,7 @@ function AppContent() {
 					<Route path="/calendar" element={<UniversityCalendar />} />
 					<Route path="/profile" element={<h1>Profile</h1>} />
 					<Route path="/settings" element={<h1>Settings</h1>} />
+					<Route path="/login_activity" element={<LoginActivity/>} />
 					<Route path="*" element={<h1>404 Not Found</h1>} />
 				</Routes>
 			</main>
