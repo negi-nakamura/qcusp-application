@@ -28,8 +28,7 @@ function Dashboard() {
 
 				<Icon icon="mdi:hand-wave" className="sm:w-8 sm:h-8 hidden sm:block text-neutral-800"/>
 				<div>
-					<span className="wrap-break-words text-[13px] sm:text-xl block sm:inline font-medium">{"Welcome Back, "}</span>
-					<span className="wrap-break-words text-xl sm:text-xl block sm:inline font-semibold text-primary-500"> {student.fullName}!</span>
+					<span className="wrap-break-words text-xl sm:text-xl block sm:inline font-semibold text-primary-500"> {student.fullName}</span>
 					<span className="wrap-break-words text-xs sm:text-base block font-normal">{student.student_id} | {student.course}</span>
 				</div>
 
@@ -88,7 +87,7 @@ function Dashboard() {
 			{/*Courses and Calendar*/}
 			<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-5 sm:gap-7"> 
 				
-				<section>
+				<section className="flex flex-col h-full">
 					<NavLink to="/courses" className="flex mb-2 justify-between items-center cursor-pointer">
 						<div className="flex items-center gap-1.5 text-neutral-800">
 							<Icon icon="tabler:clipboard-text-filled" className="sm:w-6 sm:h-6 "/>
@@ -102,7 +101,7 @@ function Dashboard() {
 					<CoursePreview/>		
 				</section>
 
-				<section>
+				<section className="flex flex-col h-full">
 					<NavLink to="/calendar" className="flex mb-2 justify-between items-center cursor-pointer">
 						<div className="flex items-center gap-1.5 text-neutral-800">
 							<Icon icon="solar:calendar-bold" className="sm:w-6 sm:h-6 "/>

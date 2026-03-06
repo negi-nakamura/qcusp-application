@@ -685,9 +685,9 @@ function CalendarPreview() {
 				</>
 			)}
 
-			<div className="container mx-auto  max-w-[900px]">
+			<div className="container mx-auto max-w-[900px] sm:h-full">
 
-				<div className="w-full max-w-[900px] mx-auto mt-2 mb-10 rounded-xl select-none bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 sm:pb-8 pt-4 sm:pt-8 shadow-lg">
+				<div className="w-full h-full max-w-[900px] mx-auto rounded-xl select-none bg-neutral-50 px-4 sm:px-6 md:px-10 pb-4 sm:pb-6 pt-4 sm:pt-8 shadow-lg">
 					{/* Calendar */}
 					<div className=" overflow-hidden">
 						{renderHeader()}
@@ -696,7 +696,7 @@ function CalendarPreview() {
 					</div>
 
 					{/* Events Sections */}
-					<section className="mt-4 sm:mt-6">
+					<section className="mt-4 sm:mt-6 ">
 						<h2 className="flex items-center gap-2 text-gray-900 font-semibold mb-3 select-none">
 							<Icon
 								icon="solar:calendar-bold"
@@ -710,7 +710,7 @@ function CalendarPreview() {
 						</h2>
 
 						{(holidaysThisMonth.length > 0 || eventsThisMonth.length > 0) ? (
-							<div className="h-[150px] sm:h-[80px] overflow-y-auto pr-1">
+							<div className="sm:h-[80px] sm:overflow-y-auto pr-1">
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
 									{/* Holidays First */}
 									{holidaysThisMonth.map((holiday) => (

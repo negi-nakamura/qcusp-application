@@ -609,18 +609,17 @@ function UniversityCalendar() {
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px]">
 				{/* Title */}
 				<div className="mb-4 sm:mb-6">
-					<h1 className="text-[15px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
+					<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
 						<Icon
 							icon="solar:calendar-bold"
 							width={24}
 							height={24}
 							className="hidden sm:w-7 sm:h-7 sm:block text-neutral-800"
 						/>
-						<span className="break-words">University Calendar - Academic Year {academicYear}</span>
+						<span className="break-words">University Calendar</span>
 					</h1>
 					<p className="text-sm sm:text-base md:text-lg font-regular text-gray-600 mb-3 pl-0 sm:pl-10">
-						{semesterLabel} | {format(semesterStart, "MMMM d, yyyy")} -{" "}
-						{format(semesterEnd, "MMMM d, yyyy")}
+						{semesterLabel} | {format(semesterStart, "MMM d yyyy")} - {format(semesterEnd, "MMM d yyyy")}
 					</p>
 				</div>
 

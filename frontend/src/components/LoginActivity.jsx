@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DateTime } from "luxon";
+import { Icon } from "@iconify/react";
 
 function LoginActivity() {
 	const [activities, setActivities] = useState([]);
@@ -87,43 +88,62 @@ function LoginActivity() {
 	}
 
 	return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] items-center flex flex-col mb-10">
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] items-center flex flex-col mb-10">
 
 			{/* Title */}
-			<h1 className="mb-3 sm:mb-4 font-semibold flex items-center justify-center gap-3 text-gray-800 mt-4 sm:mt-5">
-
-				<div className="flex flex-col items-center">
-					<span className="wrap-break-words mb-1 text-xl sm:text-xl block sm:inline font-semibold text-primary-500">Account Login Activity</span>
-					<span className="wrap-break-words text-[13px] sm:text-base block font-normal text-center text-neutral-300">View all recorded login sessions and account activities related to your account.</span>
-				</div>
-
-			</h1>
+			<div className="mb-2 sm:mb-4 self-start">
+				<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
+					<Icon
+						icon="material-symbols:login-rounded"
+						width={24}
+						height={24}
+						className="hidden sm:w-7 sm:h-7 sm:block text-neutral-800"
+					/>
+					<span className="wrap-break-words">Account Login Activity</span>
+				</h1>
+			</div>
 
 			<div className="overflow-x-auto bg-neutral-50 shadow-lg rounded-lg w-full max-w-[1000px]">
 				<table className="min-w-full text-sm text-left">
 				<thead className="bg-neutral-50 text-gray-700 uppercase text-xs sm:text-sm">
 					<tr>
-					<th className="px-4 py-3">ID</th>
+					<th className="hidden sm:block px-4 py-3">ID</th>
 					<th className="px-4 py-3">Location & IP</th>
-					<th className="px-4 py-3">Browser & Device</th>
+					<th className="px-2 py-3 sm:px-4">Browser & Device</th>
 					<th className="px-4 py-3">Last Access</th>
-					<th className="px-4 py-3">Login Time</th>
+					<th className="hidden sm:block px-4 py-3">Login Time</th>
 					</tr>
 				</thead>
 				<tbody>
 					{activities.map((session, idx2) => (
 						<tr key={idx2} className={idx2 % 2 === 0 ? "bg-white" : "bg-neutral-50"}>
-							<td className="px-4 py-3 font-semibold text-gray-700 ">{session.id}</td>
+							<td className="hidden sm:block px-4 py-3 font-semibold text-gray-700 ">{session.id}</td>
 							<td className="px-4 py-3">
 								<div className="font-medium text-gray-800">{session.location}</div>
 								<div className="text-gray-500 text-xs">{session.ip}</div>
 							</td>
-							<td className="px-4 py-3">
+							<td className="px-2 py-3 sm:px-4">
 								<div className="font-medium text-gray-800">{session.browser}</div>
 								<div className="text-gray-500 text-xs">{session.device} ({session.os})</div>
 							</td>
-							<td className="px-4 py-3 text-gray-600">{session.lastAccess}</td>
-							<td className="px-4 py-3 text-gray-600">{session.created}</td>
+
+							{/* desktop */}
+							<td className="hidden sm:table-cell px-4 py-3 text-gray-600">
+								{session.lastAccess}
+							</td>
+							<td className="hidden sm:table-cell px-4 py-3 text-gray-600">
+								{session.created}
+							</td>
+
+							{/* mobile combined */}
+							<td className="sm:hidden px-4 py-2">
+								<div className="text-gray-800 text-sm">
+									{session.lastAccess}
+								</div>
+								<div className="text-gray-500 text-xs">
+									Login: {session.created}
+								</div>
+							</td>
 						</tr>
 					))}
 				</tbody>

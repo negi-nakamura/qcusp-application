@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { DateTime } from "luxon";
+import { Icon } from "@iconify/react";
 
 function News() {
 	const limit = 5
@@ -62,25 +62,28 @@ function News() {
 	}
 
 	return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] items-center flex flex-col mb-10">
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] items-center flex flex-col mb-10">
 
 			{/* Title */}
-			<h1 className="mb-3 sm:mb-4 font-semibold flex items-center justify-center gap-3 text-gray-800 mt-4 sm:mt-5">
+			<div className="mb-2 sm:mb-4 self-start">
+				<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
+					<Icon
+						icon="material-symbols:login-rounded"
+						width={24}
+						height={24}
+						className="hidden sm:w-7 sm:h-7 sm:block text-neutral-800"
+					/>
+					<span className="wrap-break-words">Latest News and Announcements</span>
+				</h1>
+			</div>
 
-				<div className="flex flex-col items-center">
-					<span className="wrap-break-words mb-1 text-xl sm:text-xl block sm:inline font-semibold text-primary-500">News and Announcements</span>
-					<span className="wrap-break-words text-[13px] sm:text-base block font-normal text-center text-neutral-300">Latest updates, announcements, and important information from Quezon City University.</span>
-				</div>
-
-			</h1>
-
-			<div className="overflow-x-auto space-y-2 w-full max-w-[1000px] py-2">
+			<div className="overflow-x-auto gap-2 w-full max-w-[1000px] grid grid-cols-1 sm:grid-cols-2">
 				{posts.map((post, index) => (
-					<div key={index} className="min-w-full ">
-						<div className="bg-neutral-50 shadow-md hover:shadow-xs transition flex h-full">
+					<a key={index} className="min-w-full" href={post.url}>
+						<div className="bg-neutral-50 transition h-full">
 
 							{/* IMAGE */}
-							<div className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] shrink-0 aspect-square overflow-hidden relative">
+							<div className="w-full shrink-0 aspect-video overflow-hidden relative">
 								<img src={post.bg_url} alt="News Background" className="w-full h-full object-cover"/>
 							</div>
 
@@ -93,21 +96,21 @@ function News() {
 								</h2>	
 
 								{/*News Message*/}
-								<p className="text-xs sm:text-[13px] md:text-sm text-gray-800 mb-2 line-clamp-2 sm:line-clamp-3 md:line-clamp-4" >
+								<p className="text-xs sm:text-[13px] md:text-sm text-gray-800 mb-2 line-clamp-4 sm:line-clamp-4 md:line-clamp-4" >
 									{post.message}
 								</p>
 
 								{/*Link*/}
 								<div className="flex items-center gap-1 mt-auto">
-									<span> <a href={post.url} rel="noopener noreferrer" target="_blank" className="text-xs sm:text-[13px] md:text-sm text-blue-400"> {post.post_type} </a> </span>
-									<span className="text-xs sm:text-[13px]  text-neutral-300">•</span>
+									<span className="text-xs sm:text-[13px] md:text-sm text-blue-400">  {post.post_type} </span>
+									<span className="text-xs sm:text-[13px] text-neutral-300">•</span>
 									<span className="text-[10px] sm:text-[11px] text-neutral-300"> {post.date_posted}</span>
 								</div>
 
 							</div>
 
 						</div>
-					</div>
+					</a>
 				))}
 			</div>
 		</div>

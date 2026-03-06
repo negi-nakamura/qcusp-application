@@ -32,21 +32,24 @@ function Profile() {
 	// }
 
 	return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] items-center flex flex-col mb-5">
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] items-center flex flex-col mb-5">
 
 			{/* Title */}
-			<h1 className="mb-3 sm:mb-4 font-semibold flex items-center justify-center gap-3 text-gray-800 mt-4 sm:mt-5">
+			<div className="mb-2 sm:mb-4 self-start">
+				<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
+					<Icon
+						icon="material-symbols:person"
+						width={24}
+						height={24}
+						className="hidden sm:w-7 sm:h-7 sm:block text-neutral-800"
+					/>
+					<span className="wrap-break-words">Personal Information</span>
+				</h1>
+			</div>
 
-				<div className="flex flex-col items-center">
-					<span className="wrap-break-words mb-1 text-xl sm:text-xl block sm:inline font-semibold text-primary-500">Personal Information</span>
-					<span className="wrap-break-words text-[13px] sm:text-base block font-normal text-center text-neutral-300">Access and view all your student profile details and account information.</span>
-				</div>
+			<div className=" space-y-0.5 w-full max-w-[1000px]">
 
-			</h1>
-
-			<div className=" space-y-0.5 w-full max-w-[600px] py-2">
-
-				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-t-2xl">
+				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-t-lg">
 					<Icon icon="solar:camera-bold" width={30} height={30} className="text-neutral-600 flex-shrink-0" />
 					<div className="flex items-center justify-between flex-1">
 						<p className="text-neutral-800 font-semibold text-sm">Profile Image</p>
@@ -110,7 +113,7 @@ function Profile() {
 					</div>
 				</section>
 
-				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-b-2xl">
+				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-b-lg">
 					<Icon icon="mingcute:cake-fill" width={30} height={30} className="text-neutral-600 flex-shrink-0" />
 					<div>
 						<p className="text-neutral-800 font-semibold text-sm">Birthday</p>

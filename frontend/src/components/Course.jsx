@@ -81,7 +81,7 @@ function Course() {
 
 			{/* Title */}
 			<div className="mb-2 sm:mb-4">
-				<h1 className="text-[15px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
+				<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
 					<Icon
 						icon="tabler:clipboard-text-filled"
 						width={24}

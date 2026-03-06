@@ -75,7 +75,7 @@ function CoursePreview() {
 	if (courses.length === 0) return null;
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
+		<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
 
 			{courses.map((course, idx) => (
 				<div
@@ -95,14 +95,14 @@ function CoursePreview() {
 					</div>
 
 					{/* Course Name */}
-					<h2 className="px-3 text-[12px] sm:text-lg font-semibold text-gray-800 mb-1 line-clamp-2">
+					<h2 className="px-3 text-[16px] sm:text-lg font-semibold text-gray-800 mb-1 line-clamp-2">
 						{course.name}
 					</h2>
 
 					<hr className="mx-3 border-gray-200 mb-2" />
 
 					{/* Course Details */}
-					<div className="flex flex-col gap-1 mb-2 text-[12px] sm:text-sm text-gray-600 px-3">
+					<div className="flex flex-col gap-1 mb-2 text-[13px] sm:text-sm text-gray-600 px-3">
 
 						<div className="flex items-center gap-1">
 							<Icon icon="iconamoon:profile-fill" width={14} height={14} className="text-gray-500"/>
@@ -117,10 +117,13 @@ function CoursePreview() {
 						{/* ✅ Schedule Split into Separate Lines */}
 						<div className="flex items-start gap-1">
 							<Icon icon="material-symbols:schedule" width={14} height={14} className="text-gray-500 mt-0.5"/>
-							<div className="flex flex-col leading-tight">
+							<div className="flex-col leading-tight hidden sm:flex">
 								{course.schedule.split(" | ").map((time, i) => (
 									<span key={i}>{time}</span>
 								))}
+							</div>
+							<div className="flex flex-col leading-tight sm:hidden">
+								<span>{course.schedule}</span>
 							</div>
 						</div>
 
@@ -132,17 +135,21 @@ function CoursePreview() {
 								height={14}
 								className="text-gray-500 mt-0.5"
 							/>
-							<div className="flex flex-col leading-tight">
+							<div className="flex-col leading-tight hidden sm:flex">
 								{course.room.split(" | ").map((room, i) => (
 									<span key={i}>{room}</span>
 								))}
+							</div>
+
+							<div className="flex flex-col leading-tight sm:hidden">
+								<span>{course.room}</span>
 							</div>
 						</div>
 
 					</div>
 
 					{/* Course Tags */}
-					<div className="flex flex-wrap gap-1 mb-2 px-3">
+					<div className="flex flex-wrap gap-1 mb-3 px-3">
 						<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
 							{course.year}
 						</span>

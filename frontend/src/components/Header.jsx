@@ -106,7 +106,29 @@ function Header({ setUser }) {
 					<div className="overflow-hidden rounded-full  w-8">
 						<img src="https://res.cloudinary.com/djbdsrwcz/image/upload/v1772728195/profile_1.jpg" alt="Default Profile"/>
 					</div>
-					<Icon icon={dropdownOpen ? "iconamoon:arrow-up-2" : "iconamoon:arrow-down-2"} width={24} height={24} className="text-white"/>
+					<div className="ml-1 w-5 h-5 text-white">
+					{dropdownOpen ? (
+						// Up arrow SVG
+						<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						>
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+						</svg>
+					) : (
+						// Down arrow SVG
+						<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						>
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+						</svg>
+					)}
+					</div>
 					<Account logout={logout} dropdownOpen={dropdownOpen} />
 				</div>
 			</div>
