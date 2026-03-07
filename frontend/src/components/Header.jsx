@@ -104,7 +104,7 @@ function Header({ setUser, profile }) {
 			<div className="flex gap-5 items-center select-none">
 				<div className="flex items-center mr-10 md:mr-0 cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)} ref={accountRef}>
 					<div className="overflow-hidden rounded-full  w-8">
-						<img src="https://res.cloudinary.com/djbdsrwcz/image/upload/v1772728195/profile_1.jpg" alt="Default Profile"/>
+						<img src={profile.profile_image_url} alt="Default Profile"/>
 					</div>
 					<div className="ml-1 w-5 h-5 text-white">
 					{dropdownOpen ? (
