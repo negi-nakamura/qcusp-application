@@ -46,7 +46,6 @@ router.get("/calendar/university", authenticateToken, async (req, res) => {
 			school_year: selectedSchoolYear,
 			total_events: universityResult.rows.length,
 			events: universityResult.rows,
-			university_events: universityResult.rows 
 		});
 
 	} catch (err) {

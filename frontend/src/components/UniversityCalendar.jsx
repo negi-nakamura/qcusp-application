@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths, isSameMonth, isSameDay, parseISO, isWithinInterval, isBefore, isAfter, getMonth, getDate, isEqual } from "date-fns";
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import PdfViewer from "./PdfViewer";
+import PdfModal from "./PdfModal";
 
 const academicYear = "2025-2026";
 const semesterLabel = "2nd Semester";
@@ -569,46 +569,16 @@ function UniversityCalendar() {
 				</>
 			)}
 
-			{isPreviewOpen && (
-			<>
-				{/* BACKDROP */}
-				<div
-				className="fixed inset-0 backdrop-blur-sm z-50"
-				style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-				onClick={() => setIsPreviewOpen(false)}
-				></div>
-
-				{/* MODAL CONTAINER */}
-				<div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 
-								bg-neutral-50 z-50 w-[95%] max-w-3xl max-h-[90vh] overflow-auto
-								 shadow-lg p-6 sm:p-6">
-				
-					{/* Close X */}
-					<button
-						onClick={() => setIsPreviewOpen(false)}
-						className="absolute top-4 right-3 p-2 text-gray-500 hover:text-gray-700"
-						aria-label="Close preview modal"
-					>
-						<svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7a1 1 0 0 0-1.41 1.42L10.59 12l-4.9 4.88a1 1 0 1 0 1.41 1.42L12 13.41l4.88 4.9a1 1 0 0 0 1.42-1.41L13.41 12l4.9-4.88a1 1 0 0 0 0-1.41z" />
-						</svg>
-					</button>
-
-					<h3 className="font-semibold text-lg mb-2">
-						Academic Calendar Preview
-					</h3>
-
-					{/* PDF Viewer */}
-					<div className="w-full flex justify-center">
-						<PdfViewer pdfFile="/ACADEMIC-CALENDAR-2025-2026.pdf" />
-					</div>
-				</div>
-			</>
-			)}
+			<PdfModal
+				isOpen={isPreviewOpen}
+				onClose={() => setIsPreviewOpen(false)}
+				pdfFile="https://res.cloudinary.com/djbdsrwcz/image/upload/v1772886849/ACADEMIC-CALENDAR-2025-2026_hl9jwg.pdf"
+				title="Calendar Preview"
+			/>
 
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px]">
 				{/* Title */}
-				<div className="mb-4 sm:mb-6">
+				<div>
 					<h1 className="text-[18px] sm:text-[21px] md:text-[26px] font-semibold flex items-center gap-2 text-gray-800 mt-4 sm:mt-5">
 						<Icon
 							icon="solar:calendar-bold"
