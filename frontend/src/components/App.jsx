@@ -30,7 +30,6 @@ function AppContent() {
 	const isLoginPage = location.pathname === "/login";
 	const isLoginActivity = location.pathname === "/login_activity";
 	const [user, setUser] = useState(null);
-	const [profile, setProfile] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -39,16 +38,8 @@ function AppContent() {
 			try {
 				const response = await axios.get("/api/auth/me");
 				setUser(response.data.user);
-
-				if (response.data.user.role === "student") {
-					const profileResponse = await axios.get("/api/profile");
-					setProfile(profileResponse.data.profile);
-				} else {
-					setProfile(null); 
-				}
 			} catch (err) {
 				setUser(null);
-				setProfile(null);
 				setError(err.response.data.message);
 			} finally {
 				setLoading(false);
@@ -71,7 +62,7 @@ function AppContent() {
 
 	return (
 		<div className="min-h-screen flex flex-col">
-			{!isLoginPage && <Header setUser={setUser} profile={profile} />}
+			{!isLoginPage && <Header setUser={setUser} />}
 
 			<main className="grow flex justify-center">
 				<Routes>
