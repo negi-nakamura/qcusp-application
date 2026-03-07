@@ -11,7 +11,8 @@ export function formatDateToObject(dateValue) {
 
 	return {
 		weekday: dateTime.toFormat('cccc'),        
-		date: dateTime.toFormat('LLLL dd, yyyy'),   
+		date: dateTime.toFormat('LLLL dd, yyyy'),  
+		dateFormatted: dateTime.toFormat("MM-dd-yyyy"), 
 		time: dateTime.toFormat('hh:mm:ss a'),
 		formatted: `${dateTime.toFormat("yyyy-MM-dd")} | ${dateTime.toFormat("hh:mm a")}`       
 	};
