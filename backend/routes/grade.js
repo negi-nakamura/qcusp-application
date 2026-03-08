@@ -22,6 +22,7 @@ router.get("/grades", authenticateToken, async (req, res) => {
         rc.total_units AS "totalUnits",
         rc.gwa,
         rc.total_remarks AS "overallRemarks",
+		rc.card_url,
 
         s.subject_name AS description,
         s.subject_code AS code,
@@ -71,6 +72,7 @@ router.get("/grades", authenticateToken, async (req, res) => {
           totalUnits: row.totalUnits,
           gwa: row.gwa,
           overallRemarks: row.overallRemarks,
+		  card_url: row.card_url,
           grades: []
         };
       }
