@@ -38,7 +38,7 @@ function UniversityCalendar() {
 		const fetchUniversityEvents = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(`/api/calendar/university?school_year=${encodeURIComponent(academicYear)}`);
+				const response = await axios.get(`/api/calendar/university`);
 				console.log("Fetched university events:", response.data);
 
 				const school_year = response.data.school_year
@@ -262,22 +262,27 @@ function UniversityCalendar() {
 		setSelectedDayEvents([]);
 	};
 
-	const downloadPDF = () => {
-	const pdfUrl = "/ACADEMIC-CALENDAR-2025-2026.pdf"; 
+	const downloadPDF = async (pdfUrl, title) => {
+		try {
 
-	fetch(pdfUrl)
-		.then((res) => res.blob())
-		.then((blob) => {
-			const url = URL.createObjectURL(blob);
+			const response = await fetch(pdfUrl);
+			if (!response.ok) throw new Error("Failed to fetch PDF");
+
+			const blob = await response.blob();
+
 			const link = document.createElement("a");
-			link.href = url;
-			link.download = `qcu_academic_calendar.pdf`; 
+			link.href = window.URL.createObjectURL(blob);
+			link.download = `${title}.pdf`;
 			document.body.appendChild(link);
 			link.click();
-			document.body.removeChild(link);
-			URL.revokeObjectURL(url);
-		})
-		.catch((err) => console.error("Failed to download PDF:", err));
+
+			link.remove();
+			window.URL.revokeObjectURL(link.href);
+
+		} catch (err) {
+			console.error("PDF download failed:", err);
+			alert("Unable to download PDF. Make sure the URL is HTTPS.");
+		}
 	};
 
 	const renderHeader = () => (
@@ -698,7 +703,7 @@ function UniversityCalendar() {
 						</button>
 
 						<button
-							onClick={downloadPDF}
+							onClick={() => downloadPDF(calendarPdf, `University Calendar - ${academicYear}`)}
 							className="flex items-center justify-center gap-2 bg-primary-500 text-white rounded-lg px-3 sm:px-4 py-3 hover:bg-blue-800 transition cursor-pointer select-none w-full sm:w-auto"
 							type="button"
 						>
