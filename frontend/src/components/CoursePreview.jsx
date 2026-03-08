@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Icon } from "@iconify/react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function CoursePreview() {
 
@@ -54,39 +55,55 @@ function CoursePreview() {
 
 	if (loading) {
 		return (
-			<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
-				{Array.from({ length: 4 }).map((_, i) => (
-					<div
-						key={i}
-						className="bg-white rounded-lg shadow flex flex-col h-full animate-pulse"
-					>
-						{/* Image skeleton */}
-						<div className="w-full h-20 bg-gray-200 rounded-md mb-2"></div>
+			<div className="animate-pulse flex flex-col h-full">
 
-						{/* Title */}
-						<div className="px-3 space-y-2">
-							<div className="h-4 bg-gray-200 rounded w-3/4"></div>
-							<div className="h-4 bg-gray-200 rounded w-1/2"></div>
-						</div>
-
-						<hr className="mx-3 border-gray-200 my-2" />
-
-						{/* Details */}
-						<div className="px-3 space-y-2 mb-3">
-							<div className="h-3 bg-gray-200 rounded w-2/3"></div>
-							<div className="h-3 bg-gray-200 rounded w-1/2"></div>
-							<div className="h-3 bg-gray-200 rounded w-3/4"></div>
-							<div className="h-3 bg-gray-200 rounded w-1/3"></div>
-						</div>
-
-						{/* Tags */}
-						<div className="flex gap-2 px-3 mb-3">
-							<div className="h-5 w-16 bg-gray-200 rounded"></div>
-							<div className="h-5 w-20 bg-gray-200 rounded"></div>
-							<div className="h-5 w-14 bg-gray-200 rounded"></div>
-						</div>
+				{/* Header skeleton */}
+				<div className="flex justify-between items-center mb-2">
+					<div className="flex items-center gap-1.5">
+					<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
+					<div className="h-4 w-32 bg-gray-200 rounded"></div>
 					</div>
-				))}
+						<div className="flex items-center gap-1.5">
+						<div className="h-4 w-16 bg-gray-200 rounded"></div>
+						<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
+					</div>
+				</div>
+				
+				<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
+					{Array.from({ length: 4 }).map((_, i) => (
+						<div
+							key={i}
+							className="bg-white rounded-lg shadow flex flex-col h-full animate-pulse"
+						>
+							{/* Image skeleton */}
+							<div className="w-full h-20 bg-gray-200 rounded-md mb-2"></div>
+
+							{/* Title */}
+							<div className="px-3 space-y-2">
+								<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+								<div className="h-4 bg-gray-200 rounded w-1/2"></div>
+							</div>
+
+							<hr className="mx-3 border-gray-200 my-2" />
+
+							{/* Details */}
+							<div className="px-3 space-y-2 mb-3">
+								<div className="h-3 bg-gray-200 rounded w-2/3"></div>
+								<div className="h-3 bg-gray-200 rounded w-1/2"></div>
+								<div className="h-3 bg-gray-200 rounded w-3/4"></div>
+								<div className="h-3 bg-gray-200 rounded w-1/3"></div>
+							</div>
+
+							{/* Tags */}
+							<div className="flex gap-2 px-3 mb-3">
+								<div className="h-5 w-16 bg-gray-200 rounded"></div>
+								<div className="h-5 w-20 bg-gray-200 rounded"></div>
+								<div className="h-5 w-14 bg-gray-200 rounded"></div>
+							</div>
+						</div>
+					))}
+				</div>	
+
 			</div>
 		);
 	}
@@ -104,95 +121,108 @@ function CoursePreview() {
 	if (courses.length === 0) return null;
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
-
-			{courses.map((course, idx) => (
-				<div
-					key={idx}
-					className="bg-white rounded-lg shadow hover:shadow-md transition flex flex-col h-full"
-				>
-					{/* Background Image */}
-					<div className="w-full h-20 rounded-md overflow-hidden mb-2 relative">
-						<span className="text-[12px] sm:text-sm text-blue-600 bg-blue-50 border font-bold border-blue-200 px-2 py-1 rounded absolute top-2 left-2">
-							{course.code}
-						</span>
-						<img
-							src={`/course_bg_${course.bg}.jpg`}
-							alt="Course Background"
-							className="w-full h-full object-cover"
-						/>
-					</div>
-
-					{/* Course Name */}
-					<h2 className="px-3 text-[16px] sm:text-lg font-semibold text-gray-800 mb-1 line-clamp-2">
-						{course.name}
-					</h2>
-
-					<hr className="mx-3 border-gray-200 mb-2" />
-
-					{/* Course Details */}
-					<div className="flex flex-col gap-1 mb-2 text-[13px] sm:text-sm text-gray-600 px-3">
-
-						<div className="flex items-center gap-1">
-							<Icon icon="iconamoon:profile-fill" width={14} height={14} className="text-gray-500"/>
-							<span>{course.instructor}</span>
-						</div>
-
-						<div className="flex items-center gap-1">
-							<Icon icon="ix:scheduler-filled" width={14} height={14} className="text-gray-500"/>
-							<span>{course.day}</span>
-						</div>
-
-						{/* ✅ Schedule Split into Separate Lines */}
-						<div className="flex items-start gap-1">
-							<Icon icon="material-symbols:schedule" width={14} height={14} className="text-gray-500 mt-0.5"/>
-							<div className="flex-col leading-tight hidden sm:flex">
-								{course.schedule.split(" | ").map((time, i) => (
-									<span key={i}>{time}</span>
-								))}
-							</div>
-							<div className="flex flex-col leading-tight sm:hidden">
-								<span>{course.schedule}</span>
-							</div>
-						</div>
-
-						{/* Room */}
-						<div className="flex items-start gap-1">
-							<Icon
-								icon="mingcute:location-fill"
-								width={14}
-								height={14}
-								className="text-gray-500 mt-0.5"
-							/>
-							<div className="flex-col leading-tight hidden sm:flex">
-								{course.room.split(" | ").map((room, i) => (
-									<span key={i}>{room}</span>
-								))}
-							</div>
-
-							<div className="flex flex-col leading-tight sm:hidden">
-								<span>{course.room}</span>
-							</div>
-						</div>
-
-					</div>
-
-					{/* Course Tags */}
-					<div className="flex flex-wrap gap-1 mb-3 px-3">
-						<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
-							{course.year}
-						</span>
-						<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
-							{course.semester}
-						</span>
-						<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
-							{Number(course.units) } Units
-						</span>
-					</div>
-
+		<>
+			<div className="flex mb-2 justify-between items-center cursor-pointer">
+				<div className="flex items-center gap-1.5 text-neutral-800">
+					<Icon icon="tabler:clipboard-text-filled" className="sm:w-6 sm:h-6 "/>
+					<span className="text-sm font-medium sm:text-base">My Courses</span>
 				</div>
-			))}
-		</div>
+				<NavLink to="/courses" className="flex items-center gap-1.5 text-primary-500">
+					<span className="text-xs font-medium sm:text-sm">View All</span>
+					<Icon icon="iconamoon:arrow-right-2-light" className="w-6 h-6"/>
+				</NavLink>
+			</div>	
+			
+			<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
+
+				{courses.map((course, idx) => (
+					<div
+						key={idx}
+						className="bg-white rounded-lg shadow hover:shadow-md transition flex flex-col h-full"
+					>
+						{/* Background Image */}
+						<div className="w-full h-20 rounded-md overflow-hidden mb-2 relative">
+							<span className="text-[12px] sm:text-sm text-blue-600 bg-blue-50 border font-bold border-blue-200 px-2 py-1 rounded absolute top-2 left-2">
+								{course.code}
+							</span>
+							<img
+								src={`/course_bg_${course.bg}.jpg`}
+								alt="Course Background"
+								className="w-full h-full object-cover"
+							/>
+						</div>
+
+						{/* Course Name */}
+						<h2 className="px-3 text-[16px] sm:text-lg font-semibold text-gray-800 mb-1 line-clamp-2">
+							{course.name}
+						</h2>
+
+						<hr className="mx-3 border-gray-200 mb-2" />
+
+						{/* Course Details */}
+						<div className="flex flex-col gap-1 mb-2 text-[13px] sm:text-sm text-gray-600 px-3">
+
+							<div className="flex items-center gap-1">
+								<Icon icon="iconamoon:profile-fill" width={14} height={14} className="text-gray-500"/>
+								<span>{course.instructor}</span>
+							</div>
+
+							<div className="flex items-center gap-1">
+								<Icon icon="ix:scheduler-filled" width={14} height={14} className="text-gray-500"/>
+								<span>{course.day}</span>
+							</div>
+
+							{/* ✅ Schedule Split into Separate Lines */}
+							<div className="flex items-start gap-1">
+								<Icon icon="material-symbols:schedule" width={14} height={14} className="text-gray-500 mt-0.5"/>
+								<div className="flex-col leading-tight hidden sm:flex">
+									{course.schedule.split(" | ").map((time, i) => (
+										<span key={i}>{time}</span>
+									))}
+								</div>
+								<div className="flex flex-col leading-tight sm:hidden">
+									<span>{course.schedule}</span>
+								</div>
+							</div>
+
+							{/* Room */}
+							<div className="flex items-start gap-1">
+								<Icon
+									icon="mingcute:location-fill"
+									width={14}
+									height={14}
+									className="text-gray-500 mt-0.5"
+								/>
+								<div className="flex-col leading-tight hidden sm:flex">
+									{course.room.split(" | ").map((room, i) => (
+										<span key={i}>{room}</span>
+									))}
+								</div>
+
+								<div className="flex flex-col leading-tight sm:hidden">
+									<span>{course.room}</span>
+								</div>
+							</div>
+
+						</div>
+
+						{/* Course Tags */}
+						<div className="flex flex-wrap gap-1 mb-3 px-3">
+							<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
+								{course.year}
+							</span>
+							<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
+								{course.semester}
+							</span>
+							<span className="text-[12px] sm:text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded">
+								{Number(course.units) } Units
+							</span>
+						</div>
+
+					</div>
+				))}
+			</div>
+		</>
 	);
 }
 

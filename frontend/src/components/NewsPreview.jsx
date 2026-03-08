@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import axios from "axios";
 
 export default function NewsPreview() {
@@ -118,30 +120,56 @@ export default function NewsPreview() {
 	// Loading state
 	if (loading) {
 		return (
-			<div className="relative w-full max-w-[1500px] mx-auto overflow-hidden shadow-lg select-none bg-neutral-50 p-2">
-				
-				<div className="bg-white shadow flex h-full animate-pulse">
+			<div className="animate-pulse w-full max-w-[1500px] mx-auto select-none p-2">
 
-					{/* IMAGE SKELETON */}
-					<div className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] shrink-0 aspect-square bg-gray-200"></div>
+			{/* Header skeleton */}
+			<div className="flex justify-between items-center mb-2">
+				<div className="flex items-center gap-1.5">
+				<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
+				<div className="h-4 w-32 bg-gray-200 rounded"></div>
+				</div>
+					<div className="flex items-center gap-1.5">
+					<div className="h-4 w-16 bg-gray-200 rounded"></div>
+					<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
+				</div>
+			</div>
 
-					{/* CONTENT SKELETON */}
-					<div className="px-3 py-2.5 sm:px-3.5 sm:py-3 md:px-4 md:py-3.5 flex flex-col w-full gap-2">
+			{/* Carousel skeleton */}
+			<div className="relative w-full overflow-hidden shadow-lg bg-neutral-50">
+				<div className="flex">
 
+				{Array.from({ length: 3 }).map((_, i) => (
+					<div key={i} className="min-w-full p-2">
+					<div className="bg-white shadow flex h-32 sm:h-36 md:h-40 lg:h-44">
+
+						{/* IMAGE SKELETON */}
+						<div className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] shrink-0 aspect-square bg-gray-200"></div>
+
+						{/* CONTENT SKELETON */}
+						<div className="px-3 py-2 sm:px-4 sm:py-3 flex flex-col w-full gap-2">
 						<div className="h-4 bg-gray-200 rounded w-3/4"></div>
-
 						<div className="h-3 bg-gray-200 rounded w-full"></div>
 						<div className="h-3 bg-gray-200 rounded w-5/6"></div>
 						<div className="h-3 bg-gray-200 rounded w-2/3"></div>
-
 						<div className="mt-auto flex gap-2">
 							<div className="h-3 w-16 bg-gray-200 rounded"></div>
 							<div className="h-3 w-10 bg-gray-200 rounded"></div>
 						</div>
+						</div>
 
 					</div>
+					</div>
+				))}
 
 				</div>
+			</div>
+
+			{/* DOT INDICATORS SKELETON */}
+			<div className="flex justify-center items-center mt-2 sm:mt-3 gap-2">
+				{Array.from({ length: 5 }).map((_, i) => (
+				<div key={i} className="rounded-full w-2 h-2 bg-gray-300"></div>
+				))}
+			</div>
 
 			</div>
 		);
@@ -162,6 +190,17 @@ export default function NewsPreview() {
 
 	return (
 		<>
+
+		<div className="flex mb-2 justify-between items-center">
+			<div className="flex items-center gap-1.5 text-neutral-800">
+				<Icon icon="fluent:news-20-filled" className="sm:w-6 sm:h-6 "/>
+				<span className="text-sm font-medium sm:text-base">News and Announcements</span>
+			</div>
+			<NavLink to="/news" className="flex items-center gap-1.5 text-primary-500 cursor-pointer">
+				<span className="text-xs font-medium sm:text-sm">View All</span>
+				<Icon icon="iconamoon:arrow-right-2-light" className="w-6 h-6"/>
+			</NavLink>
+		</div>
 
 		{/*POST*/}
 		<div className="relative w-full max-w-[1500px] mx-auto overflow-hidden shadow-lg select-none bg-neutral-50" onMouseEnter={stopAutoPlay} onMouseLeave={startAutoPlay}>

@@ -27,9 +27,27 @@ function Profile() {
 
 	if (loading) {
 		return (
-		<div className="flex justify-center items-center h-40 text-gray-500">
-			Loading personal information...
-		</div>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] items-center flex flex-col mb-5 space-y-0.5 mt-5">
+				{/* Title Skeleton */}
+				<div className="mb-2 sm:mb-4 self-start flex items-center gap-2 animate-pulse">
+					<div className="hidden sm:block w-7 h-7 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-60 bg-gray-200 rounded"></div>
+				</div>
+
+				{/* Sections Skeleton */}
+				{[...Array(8)].map((_, idx) => (
+					<section
+						key={idx}
+						className={`bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-md animate-pulse ${idx === 0 ? 'rounded-t-lg' : ''} ${idx === 7 ? 'rounded-b-lg' : ''}`}
+					>
+						<div className="w-7 h-7 bg-gray-200 rounded-full shrink-0"></div>
+						<div className="flex-1 space-y-2 min-w-0">
+							<div className="h-4 bg-gray-200 w-1/3 rounded"></div>
+							<div className="h-3 bg-gray-300 w-1/2 rounded"></div>
+						</div>
+					</section>
+				))}
+			</div>
 		);
 	}
 
@@ -79,7 +97,7 @@ function Profile() {
 					<Icon icon="material-symbols:person" width={30} height={30} className="text-neutral-600 shrink-0" />
 					<div>
 						<p className="text-neutral-800 font-semibold text-sm">Name</p>
-						<p className="text-neutral-500 text-sm">{`${profile.first_name} ${profile != null ? profile.middle_name : ""} ${profile.last_name}`}</p>
+						<p className="text-neutral-500 text-sm">{`${profile.first_name} ${profile.middle_name != null ? profile.middle_name : ""} ${profile.last_name}`}</p>
 					</div>
 				</section>
 

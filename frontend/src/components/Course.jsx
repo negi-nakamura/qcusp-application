@@ -82,6 +82,12 @@ function Course() {
 	if (loading) {
 		return (
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] mt-5">
+
+				<div className="mb-2 sm:mb-4 self-start flex items-center gap-2 animate-pulse">
+					<div className="hidden sm:block w-7 h-7 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-60 bg-gray-200 rounded"></div>
+				</div>
+
 				<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full mx-auto mt-2 mb-10 animate-pulse">
 					{Array.from({ length: 6 }).map((_, idx) => (
 						<div key={idx} className="bg-neutral-50 rounded-lg shadow flex flex-col h-full">

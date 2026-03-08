@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths, isSameMonth, isSameDay, parseISO, isWithinInterval, isBefore, isAfter, getMonth, getDate, isEqual } from "date-fns";
 import { Icon } from "@iconify/react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const today = new Date();
 
@@ -430,51 +431,66 @@ function CalendarPreview() {
 	// Loading state
 	if (loading && !universityEvents.length) {
 		return (
-			<div className="container mx-auto max-w-[900px]">
-				<div className="w-full rounded-xl bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 pt-8 shadow-lg animate-pulse">
-
-					{/* Header skeleton */}
-					<div className="flex justify-between items-center mb-4">
-						<div className="h-8 w-8 bg-gray-200 rounded"></div>
-						<div className="h-6 w-40 bg-gray-200 rounded"></div>
-						<div className="h-8 w-8 bg-gray-200 rounded"></div>
+			<div className="animate-pulse flex flex-col h-full">
+				
+				{/* Header skeleton */}
+				<div className="flex justify-between items-center mb-2">
+					<div className="flex items-center gap-1.5">
+					<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
+					<div className="h-4 w-32 bg-gray-200 rounded"></div>
 					</div>
-
-
-					{/* Weekday labels */}
-					<div className="grid grid-cols-7 gap-2 mb-2">
-						{Array.from({ length: 7 }).map((_, i) => (
-							<div key={i} className="h-4 bg-gray-200 rounded"></div>
-						))}
+						<div className="flex items-center gap-1.5">
+						<div className="h-4 w-16 bg-gray-200 rounded"></div>
+						<div className="h-5 w-5 bg-gray-200 rounded-full"></div>
 					</div>
+				</div>
 
-					{/* Calendar grid skeleton */}
-					<div className="grid grid-cols-7 gap-1">
-						{Array.from({ length: 35 }).map((_, i) => (
-							<div
-								key={i}
-								className="h-12 sm:h-16 bg-gray-200 rounded"
-							></div>
-						))}
-					</div>
+				<div className="container mx-auto max-w-[900px]">
+					<div className="w-full rounded-xl bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 pt-8 shadow-lg">
 
-					{/* Events section skeleton */}
-					<div className="mt-6">
-						<div className="h-5 w-48 bg-gray-200 rounded mb-4"></div>
+						{/* Header skeleton */}
+						<div className="flex justify-between items-center mb-4">
+							<div className="h-8 w-8 bg-gray-200 rounded"></div>
+							<div className="h-6 w-40 bg-gray-200 rounded"></div>
+							<div className="h-8 w-8 bg-gray-200 rounded"></div>
+						</div>
 
-						<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-							{Array.from({ length: 4 }).map((_, i) => (
-								<div
-									key={i}
-									className="bg-white border border-gray-200 rounded-md p-4 space-y-2"
-								>
-									<div className="h-4 bg-gray-200 rounded w-3/4"></div>
-									<div className="h-3 bg-gray-200 rounded w-1/2"></div>
-								</div>
+
+						{/* Weekday labels */}
+						<div className="grid grid-cols-7 gap-2 mb-2">
+							{Array.from({ length: 7 }).map((_, i) => (
+								<div key={i} className="h-4 bg-gray-200 rounded"></div>
 							))}
 						</div>
-					</div>
 
+						{/* Calendar grid skeleton */}
+						<div className="grid grid-cols-7 gap-1">
+							{Array.from({ length: 35 }).map((_, i) => (
+								<div
+									key={i}
+									className="h-12 sm:h-16 bg-gray-200 rounded"
+								></div>
+							))}
+						</div>
+
+						{/* Events section skeleton */}
+						<div className="mt-6">
+							<div className="h-5 w-48 bg-gray-200 rounded mb-4"></div>
+
+							<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+								{Array.from({ length: 4 }).map((_, i) => (
+									<div
+										key={i}
+										className="bg-white border border-gray-200 rounded-md p-4 space-y-2"
+									>
+										<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+										<div className="h-3 bg-gray-200 rounded w-1/2"></div>
+									</div>
+								))}
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		);
@@ -708,6 +724,17 @@ function CalendarPreview() {
 					</div>
 				</>
 			)}
+
+			<div className="flex mb-2 justify-between items-center cursor-pointer">
+				<div className="flex items-center gap-1.5 text-neutral-800">
+					<Icon icon="solar:calendar-bold" className="sm:w-6 sm:h-6 "/>
+					<span className="text-sm font-medium sm:text-base">University Calendar</span>
+				</div>
+				<NavLink to="/calendar" className="flex items-center gap-1.5 text-primary-500">
+					<span className="text-xs font-medium sm:text-sm">View All</span>
+					<Icon icon="iconamoon:arrow-right-2-light" className="w-6 h-6"/>
+				</NavLink>
+			</div>	
 
 			<div className="container mx-auto max-w-[900px] sm:h-full">
 

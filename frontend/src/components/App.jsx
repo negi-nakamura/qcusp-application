@@ -76,7 +76,7 @@ function AppContent() {
 			<main className="grow flex justify-center">
 				<Routes>
 					<Route path="/login" element={<Login setUser={setUser}/>} />
-            		<Route path="/" element={<Dashboard />} />	
+            		<Route path="/" element={<Dashboard/>} />	
 					<Route path="/courses" element={<Course />} />
 					<Route path="/grades" element={<Grades/>} />
 					<Route path="/calendar" element={<UniversityCalendar />} />

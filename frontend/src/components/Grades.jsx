@@ -83,6 +83,12 @@ function Grades() {
 	if (loading) {
 		return (
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] mt-5">
+
+				<div className="mb-2 sm:mb-4 self-start flex items-center gap-2 animate-pulse">
+					<div className="hidden sm:block w-7 h-7 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-60 bg-gray-200 rounded"></div>
+				</div>
+				
 				{Array.from({ length: 2 }).map((_, idx) => (
 					<div key={idx} className="w-full mx-auto mt-2 mb-10 rounded-sm bg-neutral-50 shadow animate-pulse">
 

@@ -456,8 +456,13 @@ function UniversityCalendar() {
 	// Loading state
 	if (loading && !universityEvents.length) {
 		return (
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px] animate-pulse">
-			
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px] animate-pulse mt-5">
+				
+			<div className="mb-2 sm:mb-4 self-start flex items-center gap-2 animate-pulse">
+					<div className="hidden sm:block w-7 h-7 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-60 bg-gray-200 rounded"></div>
+			</div>
+
 			{/* Calendar Card */}
 			<div className="w-full mx-auto mt-4 mb-10 rounded-xl bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 sm:pb-8 pt-4 sm:pt-8 shadow-[0_13px_34px_rgba(0,0,0,0.1)]">
 				
