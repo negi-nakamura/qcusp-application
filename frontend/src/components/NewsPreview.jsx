@@ -118,10 +118,31 @@ export default function NewsPreview() {
 	// Loading state
 	if (loading) {
 		return (
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px]">
-				<div className="flex justify-center items-center h-64">
-					<div className="text-gray-500">Loading post...</div>
+			<div className="relative w-full max-w-[1500px] mx-auto overflow-hidden shadow-lg select-none bg-neutral-50 p-2">
+				
+				<div className="bg-white shadow flex h-full animate-pulse">
+
+					{/* IMAGE SKELETON */}
+					<div className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[180px] shrink-0 aspect-square bg-gray-200"></div>
+
+					{/* CONTENT SKELETON */}
+					<div className="px-3 py-2.5 sm:px-3.5 sm:py-3 md:px-4 md:py-3.5 flex flex-col w-full gap-2">
+
+						<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+
+						<div className="h-3 bg-gray-200 rounded w-full"></div>
+						<div className="h-3 bg-gray-200 rounded w-5/6"></div>
+						<div className="h-3 bg-gray-200 rounded w-2/3"></div>
+
+						<div className="mt-auto flex gap-2">
+							<div className="h-3 w-16 bg-gray-200 rounded"></div>
+							<div className="h-3 w-10 bg-gray-200 rounded"></div>
+						</div>
+
+					</div>
+
 				</div>
+
 			</div>
 		);
 	}

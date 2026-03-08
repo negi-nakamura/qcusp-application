@@ -19,7 +19,7 @@ function UniversityCalendar() {
 	const [error, setError] = useState(null);
 	const [currentMonth, setCurrentMonth] = useState(null);
 	const [selectedDayEvents, setSelectedDayEvents] = useState([]);
-	const [selectedDayDate, setSelectedDayDate] = useState(null); // Add this new state
+	const [selectedDayDate, setSelectedDayDate] = useState(null); 
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [isDayModalOpen, setIsDayModalOpen] = useState(false);
 
@@ -456,10 +456,52 @@ function UniversityCalendar() {
 	// Loading state
 	if (loading && !universityEvents.length) {
 		return (
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px]">
-				<div className="flex justify-center items-center h-64">
-					<div className="text-gray-500">Loading calendar...</div>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px] animate-pulse">
+			
+			{/* Calendar Card */}
+			<div className="w-full mx-auto mt-4 mb-10 rounded-xl bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 sm:pb-8 pt-4 sm:pt-8 shadow-[0_13px_34px_rgba(0,0,0,0.1)]">
+				
+				{/* Header skeleton */}
+				<div className="flex justify-between items-center mb-4">
+					<div className="h-8 w-8 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-32 bg-gray-200 rounded"></div>
+					<div className="h-8 w-8 bg-gray-200 rounded-full"></div>
 				</div>
+				<hr className="text-gray-200 mb-3" />
+
+				{/* Days of week skeleton */}
+				<div className="grid grid-cols-7 gap-1 mb-2">
+				{Array.from({ length: 7 }).map((_, i) => (
+					<div key={i} className="h-6 bg-gray-200 rounded"></div>
+				))}
+				</div>
+
+				{/* Calendar cells skeleton */}
+				<div className="grid grid-rows-5 grid-cols-7 gap-1 mb-4">
+				{Array.from({ length: 35 }).map((_, i) => (
+					<div key={i} className="h-12 sm:h-16 bg-gray-200 rounded relative">
+
+					</div>
+				))}
+				</div>
+
+				{/* Event list skeleton */}
+				<div className="mt-4">
+				<div className="h-6 w-48 bg-gray-200 rounded mb-3"></div>
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+					{Array.from({ length: 4 }).map((_, i) => (
+					<div key={i} className="bg-gray-200 h-20 rounded-md border border-gray-200"></div>
+					))}
+				</div>
+				</div>
+
+				{/* Action buttons skeleton */}
+				<div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-3">
+				<div className="h-10 w-full sm:w-32 bg-gray-200 rounded"></div>
+				<div className="h-10 w-full sm:w-40 bg-gray-200 rounded"></div>
+				</div>
+
+			</div>
 			</div>
 		);
 	}

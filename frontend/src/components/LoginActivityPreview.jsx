@@ -40,11 +40,42 @@ function LoginActivityPreview() {
 
 	if (loading) {
 		return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
-			<div className="flex justify-center items-center h-64 text-gray-500">
-			Loading activity activities...
+			<div className="flex flex-col w-full gap-2 bg-neutral-50 p-2 shadow-lg rounded-lg max-h-[300px] sm:h-full flex-2">
+				
+				{[...Array(2)].map((_, idx) => (
+					<section
+						key={idx}
+						className="grid grid-cols-2 gap-4 gap-y-2 bg-white shadow-sm rounded-lg p-3 flex-1 items-center animate-pulse"
+					>
+
+						{/* Column 1 */}
+						<div className="flex flex-col space-y-1">
+							<div className="h-3 w-24 bg-gray-300 rounded"></div>
+							<div className="h-3 w-20 bg-gray-200 rounded"></div>
+						</div>
+
+						{/* Column 2 */}
+						<div className="flex flex-col space-y-1">
+							<div className="h-3 w-16 bg-gray-300 rounded"></div>
+							<div className="h-3 w-20 bg-gray-200 rounded"></div>
+						</div>
+
+						{/* Column 3 */}
+						<div className="flex flex-col space-y-1">
+							<div className="h-3 w-20 bg-gray-300 rounded"></div>
+							<div className="h-3 w-28 bg-gray-200 rounded"></div>
+						</div>
+
+						{/* Column 4 */}
+						<div className="flex flex-col space-y-1">
+							<div className="h-3 w-24 bg-gray-300 rounded"></div>
+							<div className="h-3 w-16 bg-gray-200 rounded"></div>
+						</div>
+
+					</section>
+				))}
+
 			</div>
-		</div>
 		);
 	}
 

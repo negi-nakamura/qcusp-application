@@ -3,7 +3,6 @@ import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subM
 import { Icon } from "@iconify/react";
 import axios from "axios";
 
-
 const today = new Date();
 
 function CalendarPreview() {
@@ -18,7 +17,7 @@ function CalendarPreview() {
 	const [error, setError] = useState(null);
 	const [currentMonth, setCurrentMonth] = useState(null);
 	const [selectedDayEvents, setSelectedDayEvents] = useState([]);
-	const [selectedDayDate, setSelectedDayDate] = useState(null); // Add this new state
+	const [selectedDayDate, setSelectedDayDate] = useState(null); 
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [isDayModalOpen, setIsDayModalOpen] = useState(false);
 
@@ -260,37 +259,6 @@ function CalendarPreview() {
 		setSelectedDayEvents([]);
 	};
 
-	const downloadICS = () => {
-		let icsContent = `BEGIN:VCALENDAR
-			VERSION:2.0
-			PRODID:-//QCU Student Portal//Calendar//EN
-			CALSCALE:GREGORIAN
-			METHOD:PUBLISH
-			`;
-
-		eventsThisMonth.forEach((event) => {
-			const dtStart = format(parseISO(event.startDate), "yyyyMMdd");
-			const dtEnd = format(addDays(parseISO(event.endDate), 1), "yyyyMMdd");
-			icsContent += `BEGIN:VEVENT
-				SUMMARY:${event.title}
-				DTSTART;VALUE=DATE:${dtStart}
-				DTEND;VALUE=DATE:${dtEnd}
-				END:VEVENT
-				`;
-		});
-
-		icsContent += "END:VCALENDAR";
-
-		const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-		const url = URL.createObjectURL(blob);
-		const link = document.createElement("a");
-		link.href = url;
-		link.download = `qcu_calendar_${format(currentMonth, "yyyy_MM")}.ics`;
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
-	};
-
 	const renderHeader = () => (
 		<>
 			<div className="flex justify-between items-center mb-4 pt-3 px-2 sm:px-5 gap-2 sm:gap-15">
@@ -462,9 +430,51 @@ function CalendarPreview() {
 	// Loading state
 	if (loading && !universityEvents.length) {
 		return (
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[900px]">
-				<div className="flex justify-center items-center h-64">
-					<div className="text-gray-500">Loading calendar...</div>
+			<div className="container mx-auto max-w-[900px]">
+				<div className="w-full rounded-xl bg-neutral-50 px-4 sm:px-6 md:px-10 pb-6 pt-8 shadow-lg animate-pulse">
+
+					{/* Header skeleton */}
+					<div className="flex justify-between items-center mb-4">
+						<div className="h-8 w-8 bg-gray-200 rounded"></div>
+						<div className="h-6 w-40 bg-gray-200 rounded"></div>
+						<div className="h-8 w-8 bg-gray-200 rounded"></div>
+					</div>
+
+
+					{/* Weekday labels */}
+					<div className="grid grid-cols-7 gap-2 mb-2">
+						{Array.from({ length: 7 }).map((_, i) => (
+							<div key={i} className="h-4 bg-gray-200 rounded"></div>
+						))}
+					</div>
+
+					{/* Calendar grid skeleton */}
+					<div className="grid grid-cols-7 gap-1">
+						{Array.from({ length: 35 }).map((_, i) => (
+							<div
+								key={i}
+								className="h-12 sm:h-16 bg-gray-200 rounded"
+							></div>
+						))}
+					</div>
+
+					{/* Events section skeleton */}
+					<div className="mt-6">
+						<div className="h-5 w-48 bg-gray-200 rounded mb-4"></div>
+
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+							{Array.from({ length: 4 }).map((_, i) => (
+								<div
+									key={i}
+									className="bg-white border border-gray-200 rounded-md p-4 space-y-2"
+								>
+									<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+									<div className="h-3 bg-gray-200 rounded w-1/2"></div>
+								</div>
+							))}
+						</div>
+					</div>
+
 				</div>
 			</div>
 		);

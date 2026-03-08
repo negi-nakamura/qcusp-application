@@ -17,6 +17,7 @@ router.get("/courses", authenticateToken, async (req, res) => {
 			s.subject_code,
 			s.subject_name,
 			s.description,
+			s.subject_url,
 			sc.year_level AS year,
 			sc.semester,
 			s.units,

@@ -47,11 +47,60 @@ function Grades() {
 
 	if (loading) {
 		return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
-			<div className="flex justify-center items-center h-64 text-gray-500">
-			Loading grades...
+			<div className="flex flex-col w-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg h-full">
+				<section className="bg-white shadow-sm h-full flex flex-col max-h-[300px] animate-pulse">
+
+					{/* Header Skeleton */}
+					<div className="bg-gray-300 h-[45px] w-full"></div>
+
+					{/* Body Skeleton */}
+					<div className="grid grid-cols-2 gap-3 sm:gap-4 px-3 sm:px-4 py-3 flex-1">
+
+						{/* Left Column */}
+						<div className="space-y-3">
+							<div>
+								<div className="h-2 bg-gray-200 w-16 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-24 rounded"></div>
+							</div>
+
+							<div>
+								<div className="h-2 bg-gray-200 w-14 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-20 rounded"></div>
+							</div>
+
+							<div>
+								<div className="h-2 bg-gray-200 w-16 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-12 rounded"></div>
+							</div>
+						</div>
+
+						{/* Right Column */}
+						<div className="space-y-3">
+							<div>
+								<div className="h-2 bg-gray-200 w-16 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-20 rounded"></div>
+							</div>
+
+							<div>
+								<div className="h-2 bg-gray-200 w-14 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-16 rounded"></div>
+							</div>
+
+							<div>
+								<div className="h-2 bg-gray-200 w-24 mb-1 rounded"></div>
+								<div className="h-3 bg-gray-300 w-10 rounded"></div>
+							</div>
+						</div>
+
+					</div>
+
+					{/* Footer Skeleton */}
+					<div className="px-3 sm:px-4 py-2 bg-gray-100">
+						<div className="h-3 bg-gray-300 w-40 rounded"></div>
+					</div>
+
+				</section>
 			</div>
-		</div>
 		);
 	}
 

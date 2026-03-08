@@ -3,7 +3,6 @@ import { Icon } from "@iconify/react";
 import PdfModal from "./PdfModal";
 import axios from "axios";
 
-
 function Grades() {
 
 	const [grade, setGrade] = useState([]);
@@ -83,11 +82,77 @@ function Grades() {
 
 	if (loading) {
 		return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
-			<div className="flex justify-center items-center h-64 text-gray-500">
-			Loading grades...
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] mt-5">
+				{Array.from({ length: 2 }).map((_, idx) => (
+					<div key={idx} className="w-full mx-auto mt-2 mb-10 rounded-sm bg-neutral-50 shadow animate-pulse">
+
+						{/* Table Header Skeleton */}
+						<section className="h-10 bg-gray-300 rounded-t-md px-4 py-3 mb-3"></section>
+
+						{/* Info Section Skeleton */}
+						<section className="px-4 py-3 sm:px-6 sm:py-4">
+							<div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+								{/* Left Column */}
+								<div className="space-y-2">
+									<div className="h-4 bg-gray-200 rounded w-full"></div>
+									<div className="h-4 bg-gray-200 rounded w-5/6"></div>
+									<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+								</div>
+
+								{/* Right Column */}
+								<div className="space-y-2">
+									<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+									<div className="h-4 bg-gray-200 rounded w-2/3"></div>
+									<div className="h-4 bg-gray-200 rounded w-1/2"></div>
+								</div>
+							</div>
+
+							{/* Grades Table Skeleton */}
+							<div className="overflow-x-hidden mb-3">
+								<table className="w-full min-w-full border border-gray-200">
+									<thead>
+										<tr>
+											{Array.from({ length: 6 }).map((_, i) => (
+												<th key={i} className="py-2 px-3">
+													<div className="h-4 bg-gray-200 rounded w-20 mx-auto"></div>
+												</th>
+											))}
+										</tr>
+									</thead>
+									<tbody>
+										{Array.from({ length: 4 }).map((_, i) => (
+											<tr key={i} className={i % 2 === 0 ? "bg-gray-100" : "bg-gray-200"}>
+												{Array.from({ length: 6 }).map((_, j) => (
+													<td key={j} className="py-2 px-3">
+														<div className="h-3 bg-gray-200 rounded w-full"></div>
+													</td>
+												))}
+											</tr>
+										))}
+										{/* Totals row skeleton */}
+										<tr className="bg-gray-300">
+											{Array.from({ length: 6 }).map((_, j) => (
+												<td key={j} className="py-2 px-3">
+													<div className="h-3 bg-gray-200 rounded w-full"></div>
+												</td>
+											))}
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							{/* Notes Skeleton */}
+							<div className="mt-4 h-10 bg-gray-200 rounded mb-3"></div>
+
+							{/* Buttons Skeleton */}
+							<div className="mt-4 flex gap-2">
+								<div className="h-8 bg-gray-200 rounded w-24"></div>
+								<div className="h-8 bg-gray-200 rounded w-32"></div>
+							</div>
+						</section>
+					</div>
+				))}
 			</div>
-		</div>
 		);
 	}
 
@@ -235,10 +300,9 @@ function Grades() {
 										setPdfFile(report.card_url);
 										setIsPreviewOpen(true);
 									}}
-									className="flex items-center justify-center gap-2 border border-gray-400 rounded-lg px-4 py-3 text-gray-900 hover:bg-gray-100 transition cursor-pointer select-none sm:w-auto"
+									className="flex items-center justify-center gap-2 border border-gray-400 rounded-lg px-3 sm:px-6 py-3 text-gray-900 hover:bg-gray-100 transition cursor-pointer select-none sm:w-auto"
 									type="button"
 								>
-									<Icon icon="charm:eye" width={20} height={20} className="sm:w-5 sm:h-5 text-neutral-500"/>
 									<span className="text-sm sm:text-base text-neutral-500">Preview</span>
 								</button>
 

@@ -54,11 +54,40 @@ function CoursePreview() {
 
 	if (loading) {
 		return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px]">
-			<div className="flex justify-center items-center h-64 text-gray-500">
-			Loading courses...
+			<div className="grid grid-cols-1 sm:grid-cols-2 w-full h-full gap-3 bg-neutral-50 p-2 shadow-lg rounded-lg">
+				{Array.from({ length: 4 }).map((_, i) => (
+					<div
+						key={i}
+						className="bg-white rounded-lg shadow flex flex-col h-full animate-pulse"
+					>
+						{/* Image skeleton */}
+						<div className="w-full h-20 bg-gray-200 rounded-md mb-2"></div>
+
+						{/* Title */}
+						<div className="px-3 space-y-2">
+							<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+							<div className="h-4 bg-gray-200 rounded w-1/2"></div>
+						</div>
+
+						<hr className="mx-3 border-gray-200 my-2" />
+
+						{/* Details */}
+						<div className="px-3 space-y-2 mb-3">
+							<div className="h-3 bg-gray-200 rounded w-2/3"></div>
+							<div className="h-3 bg-gray-200 rounded w-1/2"></div>
+							<div className="h-3 bg-gray-200 rounded w-3/4"></div>
+							<div className="h-3 bg-gray-200 rounded w-1/3"></div>
+						</div>
+
+						{/* Tags */}
+						<div className="flex gap-2 px-3 mb-3">
+							<div className="h-5 w-16 bg-gray-200 rounded"></div>
+							<div className="h-5 w-20 bg-gray-200 rounded"></div>
+							<div className="h-5 w-14 bg-gray-200 rounded"></div>
+						</div>
+					</div>
+				))}
 			</div>
-		</div>
 		);
 	}
 
