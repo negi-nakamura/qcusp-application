@@ -1,51 +1,81 @@
 import express from "express";
 import pool from "../config/db.js";
 import { authenticateToken } from "../middleware/auth.js";
+import { formatDateToObject } from "../utils/dateFormatter.js";
 
 const router = express.Router();
 
 router.get("/calendar/university", authenticateToken, async (req, res) => {
 	try {
-		const { school_year, semester, event_type } = req.query;
+		const { date, semester, event_type } = req.query;
+		const targetDate = date || new Date().toISOString().split("T")[0];
 
-		const currentYear = new Date().getFullYear();
-		const defaultSchoolYear = `${currentYear - 1}-${currentYear}`;
-		const selectedSchoolYear = school_year || defaultSchoolYear;
+		// Find semester whose start is before the date
+		let calendarResult = await pool.query(
+			`
+			SELECT *
+			FROM calendar_files
+			WHERE semester_start <= $1
+			ORDER BY semester_start DESC
+			LIMIT 1
+			`,
+			[targetDate]
+		);
+
+		let calendarFile = calendarResult.rows[0];
+
+		// If date is before first semester → return earliest
+		if (!calendarFile) {
+			const fallback = await pool.query(`
+				SELECT *
+				FROM calendar_files
+				ORDER BY semester_start ASC
+				LIMIT 1
+			`);
+			calendarFile = fallback.rows[0];
+		}
 
 		let uniQuery = `
 			SELECT 
-				id,
-				title,
-				semester,
-				TO_CHAR(start_date, 'YYYY-MM-DD') AS start_date,
-				TO_CHAR(end_date, 'YYYY-MM-DD') AS end_date,
-				event_type,
+				u.id,
+				u.calendar_file_id,
+				u.title,
+				u.semester,
+				TO_CHAR(u.start_date,'YYYY-MM-DD') AS start_date,
+				TO_CHAR(u.end_date,'YYYY-MM-DD') AS end_date,
+				u.event_type,
 				'University' AS source
-			FROM university_calendar
-			WHERE school_year = $1
+			FROM university_calendar u
+			LEFT JOIN calendar_files cf
+				ON u.calendar_file_id = cf.id
+			WHERE u.calendar_file_id = $1
 		`;
 
-		const values = [selectedSchoolYear];
+		const values = [calendarFile.id];
 		let index = 2;
 
 		if (semester) {
-			uniQuery += ` AND semester = $${index++}`;
+			uniQuery += ` AND u.semester = $${index++}`;
 			values.push(semester);
 		}
 
 		if (event_type) {
-			uniQuery += ` AND event_type = $${index++}`;
+			uniQuery += ` AND u.event_type = $${index++}`;
 			values.push(event_type);
 		}
 
-		uniQuery += ` ORDER BY start_date`;
+		uniQuery += ` ORDER BY u.start_date`;
 
 		const universityResult = await pool.query(uniQuery, values);
 
 		res.json({
-			school_year: selectedSchoolYear,
+			school_year: calendarFile.school_year,
+			semester: calendarFile.semester,
+			semester_start: formatDateToObject(calendarFile.semester_start).formatted.split("|")[0].trim(),
+			semester_end: formatDateToObject(calendarFile.semester_end).formatted.split("|")[0].trim(),
+			calendar_url: calendarFile.calendar_url,
 			total_events: universityResult.rows.length,
-			events: universityResult.rows,
+			events: universityResult.rows
 		});
 
 	} catch (err) {

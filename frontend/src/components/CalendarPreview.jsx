@@ -3,22 +3,22 @@ import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subM
 import { Icon } from "@iconify/react";
 import axios from "axios";
 
-const academicYear = "2025-2026";
-const semesterLabel = "2nd Semester";
-const semesterStart = new Date(2026, 0, 12);
-const semesterEnd = new Date(2026, 4, 26);
+
+const today = new Date();
 
 function CalendarPreview() {
 
-	const today = new Date();
-	const initialMonth = isWithinInterval(today, {start: semesterStart, end: semesterEnd}) ? today : semesterStart;
-
+	const [academicYear, setAcademicYear] = useState(null)
+	const [semesterLabel, setSemesterLabel] = useState(null)
+	const [semesterStart, setSemesterStart] = useState(null)
+	const [semesterEnd, setSemesterEnd] = useState(null)
 	const [universityEvents, setUniversityEvents] = useState([]);
 	const [holidays, setHolidays] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-	const [currentMonth, setCurrentMonth] = useState(initialMonth);
+	const [currentMonth, setCurrentMonth] = useState(null);
 	const [selectedDayEvents, setSelectedDayEvents] = useState([]);
+	const [selectedDayDate, setSelectedDayDate] = useState(null); // Add this new state
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [isDayModalOpen, setIsDayModalOpen] = useState(false);
 
@@ -39,6 +39,17 @@ function CalendarPreview() {
 				setLoading(true);
 				const response = await axios.get(`/api/calendar/university?school_year=${encodeURIComponent(academicYear)}`);
 				console.log("Fetched university events:", response.data);
+
+				const school_year = response.data.school_year
+				const semester = response.data.semester
+				const semester_start = new Date(response.data.semester_start)
+				const semester_end = new Date(response.data.semester_end)
+
+				setAcademicYear(school_year)
+				setSemesterLabel(semester)
+				setSemesterStart(semester_start)
+				setSemesterEnd(semester_end)
+				setCurrentMonth(isWithinInterval(today, {start: semester_start, end: semester_end}) ? today : semester_start)
 				
 				const transformedEvents = response.data.events.map(event => ({
 					id: `uni-${event.id}`,
@@ -238,8 +249,15 @@ function CalendarPreview() {
 
 		if (allDayEvents.length > 0) {
 			setSelectedDayEvents(allDayEvents);
+			setSelectedDayDate(date); // Store the clicked date
 			setIsDayModalOpen(true);
 		}
+	};
+
+	const closeDayModal = () => {
+		setIsDayModalOpen(false);
+		setSelectedDayDate(null);
+		setSelectedDayEvents([]);
 	};
 
 	const downloadICS = () => {
@@ -470,7 +488,7 @@ function CalendarPreview() {
 					<div
 						className="fixed inset-0 backdrop-blur-sm z-100"
 						style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-						onClick={() => setIsDayModalOpen(false)}
+						onClick={closeDayModal}
 					></div>
 
 					<div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 
@@ -481,15 +499,11 @@ function CalendarPreview() {
 						
 						<h3 className="font-semibold text-base sm:text-lg mb-4 text-gray-900 pr-8">
 							Events on{" "}
-							{selectedDayEvents[0] && (
-								selectedDayEvents[0].event_type === 'holiday'
-									? format(selectedDayEvents[0].displayDate || new Date(), "MMMM d, yyyy")
-									: format(parseISO(selectedDayEvents[0].startDate), "MMMM d, yyyy")
-							)}
+							{selectedDayDate ? format(selectedDayDate, "MMMM d, yyyy") : ""}
 						</h3>
 
 						<button 
-							onClick={() => setIsDayModalOpen(false)}
+							onClick={closeDayModal}
 							className="absolute top-3 right-4 sm:hidden p-1 text-gray-500 hover:text-gray-700"
 							aria-label="Close"
 						>
@@ -571,7 +585,7 @@ function CalendarPreview() {
 
 						<div className="flex justify-end hidden sm:flex">
 							<button
-								onClick={() => setIsDayModalOpen(false)}
+								onClick={closeDayModal}
 								className="w-full sm:w-auto px-5 py-2.5 sm:py-2 bg-primary-500 text-white rounded hover:bg-primary-600 transition text-sm sm:text-base"
 							>
 								Close
