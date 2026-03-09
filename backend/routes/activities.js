@@ -11,25 +11,25 @@ router.get("/activities", authenticateToken, async (req, res) => {
 		const userId = req.user.id;
 		const limit = parseInt(req.query.limit) || 10;
 
-		const result = await pool.query(
-			`
-			SELECT 
-				id,
-				ip_address,
-				user_agent,
-				country,
-				region,
-				city,
-				created_at,
-				last_access,
-				logout_time
-			FROM sessions
-			WHERE user_id = $1
-			ORDER BY last_access DESC
-			LIMIT $2
-			`,
-			[userId, limit]
-		);
+	const result = await pool.query(
+		`
+		SELECT 
+			id,
+			ip_address,
+			user_agent,
+			country,
+			region,
+			city,
+			created_at,
+			last_access,
+			logout_time
+		FROM sessions
+		WHERE user_id = $1
+		ORDER BY last_access DESC, created_at DESC
+		LIMIT $2
+		`,
+		[userId, limit]
+	);
 
 		const activities = result.rows.map(session => {
 

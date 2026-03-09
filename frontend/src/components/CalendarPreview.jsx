@@ -38,7 +38,6 @@ function CalendarPreview() {
 			try {
 				setLoading(true);
 				const response = await axios.get(`/api/calendar/university?school_year=${encodeURIComponent(academicYear)}`);
-				console.log("Fetched university events:", response.data);
 
 				const school_year = response.data.school_year
 				const semester = response.data.semester
@@ -80,7 +79,6 @@ function CalendarPreview() {
 		const fetchHolidays = async () => {
 			try {
 				const response = await axios.get(`/api/calendar/holidays`);
-				console.log("Fetched holidays:", response.data);
 				
 				const transformedHolidays = response.data.holidays.map(holiday => ({
 					id: `hol-${holiday.id}`,

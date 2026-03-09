@@ -44,7 +44,6 @@ function Grades() {
 			}));
 
 			setGrade(transformed);
-			console.log(transformed);
 
 		} catch (err) {
 			console.error("Failed to fetch grades:", err);

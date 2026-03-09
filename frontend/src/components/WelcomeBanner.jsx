@@ -12,7 +12,6 @@ function WelcomeBanner() {
 			try {
 				setLoading(true)
 				const response = await axios.get(`/api/profile`);
-				console.log("Fetched profile:", response.data.profile);
 				setProfile(response.data.profile);
 				setError(null);
 			} catch (error) {

@@ -13,7 +13,6 @@ function News() {
 			try {
 				setLoading(true)
 				const response = await axios.get(`/api/posts?limit=${limit}`);
-				console.log("Fetched posts:", response.data);
 
 				const transformedPosts = response.data.posts.map(post => ({
 					id: `post-${post.id}`,

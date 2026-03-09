@@ -12,7 +12,6 @@ function Profile() {
 			try {
 				setLoading(true)
 				const response = await axios.get(`/api/profile`);
-				console.log("Fetched profile:", response.data.profile);
 				setProfile(response.data.profile);
 				setError(null);
 			} catch (error) {
@@ -126,6 +125,14 @@ function Profile() {
 				</section>
 
 				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5">
+					<Icon icon="mingcute:cake-fill" width={30} height={30} className="text-neutral-600 shrink-0" />
+					<div>
+						<p className="text-neutral-800 font-semibold text-sm">Birthday</p>
+						<p className="text-neutral-500 text-sm">{profile.birthday}</p>
+					</div>
+				</section>
+
+				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5">
 					<Icon icon="ic:round-email" width={30} height={30} className="text-neutral-600 shrink-0" />
 					<div className="flex-1 min-w-0">
 						<p className="text-neutral-800 font-semibold text-sm">Email Address</p>
@@ -141,19 +148,11 @@ function Profile() {
 					</div>
 				</section>
 
-				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5">
+				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-b-lg">
 					<Icon icon="mynaui:telephone-out-solid" width={30} height={30} className="text-neutral-600 shrink-0" />
 					<div>
 						<p className="text-neutral-800 font-semibold text-sm">Contact Number</p>
 						<p className="text-neutral-500 text-sm">{profile.contact_number}</p>
-					</div>
-				</section>
-
-				<section className="bg-neutral-50 flex w-full items-center py-4 px-5 gap-5 rounded-b-lg">
-					<Icon icon="mingcute:cake-fill" width={30} height={30} className="text-neutral-600 shrink-0" />
-					<div>
-						<p className="text-neutral-800 font-semibold text-sm">Birthday</p>
-						<p className="text-neutral-500 text-sm">{profile.birthday}</p>
 					</div>
 				</section>
 

@@ -157,7 +157,7 @@ function LoginActivity() {
 					<th className="px-4 py-3">Location & IP</th>
 					<th className="px-2 py-3 sm:px-4">Browser & Device</th>
 					<th className="px-4 py-3">Last Access</th>
-					<th className="hidden sm:block px-4 py-3">Login Time</th>
+					<th className="hidden sm:block px-4 py-3">Created at</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -166,7 +166,7 @@ function LoginActivity() {
 							<td className="hidden sm:block px-4 py-3 font-semibold text-gray-700 ">{session.id}</td>
 							<td className="px-4 py-3">
 								<div className="font-medium text-gray-800">{session.location}</div>
-								<div className="text-gray-500 text-xs">{session.ip}</div>
+								<div className="text-gray-500 text-xs select-none">{session.ip}</div>
 							</td>
 							<td className="px-2 py-3 sm:px-4">
 								<div className="font-medium text-gray-800">{session.browser}</div>
