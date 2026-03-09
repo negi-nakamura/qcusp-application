@@ -129,7 +129,7 @@ function Header({ setUser, profile }) {
 						</svg>
 					)}
 					</div>
-					<Account logout={logout} dropdownOpen={dropdownOpen} />
+					<Account logout={logout} dropdownOpen={dropdownOpen} setDropdownOpen={setDropdownOpen} profile={profile}/>
 				</div>
 			</div>
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Spinner = ({ size = 16, text = "Loading" }) => {
 
   const sizeClass = `h-${size} w-${size}`;

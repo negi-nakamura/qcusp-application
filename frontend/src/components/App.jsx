@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard";
 import LoginActivity from "./LoginActivity";
 import News from "./News";
 import Profile from "./Profile";
+import ScrollToTop from "./ScrollToTop"
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
@@ -21,6 +22,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<AppContent />
+			<ScrollToTop/>
 		</BrowserRouter>
 	);
 }

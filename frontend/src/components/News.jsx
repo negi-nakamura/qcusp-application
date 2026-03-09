@@ -39,9 +39,43 @@ function News() {
 
 	if (loading) {
 		return (
-		<div className="flex justify-center items-center h-40 text-gray-500">
-			Loading news and announcements...
-		</div>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1000px] flex flex-col mb-10 mt-5">
+
+				{/* Title Skeleton */}
+				<div className="mb-2 sm:mb-4 self-start flex items-center gap-2 animate-pulse">
+					<div className="hidden sm:block w-7 h-7 bg-gray-200 rounded-full"></div>
+					<div className="h-6 w-72 bg-gray-200 rounded"></div>
+				</div>
+
+				<div className="gap-2 w-full max-w-[1000px] grid grid-cols-1 sm:grid-cols-2">
+					{[...Array(4)].map((_, i) => (
+						<div key={i} className="bg-neutral-50 animate-pulse">
+
+							{/* Image Skeleton */}
+							<div className="w-full aspect-video bg-gray-200"></div>
+
+							{/* Content Skeleton */}
+							<div className="px-3 py-2.5 sm:px-3.5 sm:py-3 md:px-4 md:py-3.5">
+
+								<div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+
+								<div className="space-y-1 mb-2">
+									<div className="h-3 bg-gray-200 rounded w-full"></div>
+									<div className="h-3 bg-gray-200 rounded w-5/6"></div>
+									<div className="h-3 bg-gray-200 rounded w-4/6"></div>
+								</div>
+
+								<div className="flex items-center gap-2 mt-3">
+									<div className="h-3 bg-gray-300 rounded w-16"></div>
+									<div className="h-3 w-2 bg-gray-300 rounded"></div>
+									<div className="h-3 bg-gray-300 rounded w-20"></div>
+								</div>
+
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
 		);
 	}
 
