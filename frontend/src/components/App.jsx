@@ -30,7 +30,6 @@ function App() {
 function AppContent() {
 	const location = useLocation();
 	const isLoginPage = location.pathname === "/login";
-	const isLoginActivity = location.pathname === "/login_activity";
 	const [user, setUser] = useState(null);
 	const [profile, setProfile] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -39,6 +38,11 @@ function AppContent() {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
+				setLoading(true)
+				setProfile(null)
+				setUser(null)
+				setError(null)
+				
 				const response = await axios.get("/api/auth/me");
 				setUser(response.data.user);
 
@@ -73,11 +77,33 @@ function AppContent() {
 
 	return (
 		<div className="min-h-screen flex flex-col">
-			{!isLoginPage && <Header setUser={setUser} profile={profile} />}
+
+			{!isLoginPage && (profile ? ( <Header setUser={setUser} setProfile={setProfile} profile={profile} />) : 
+			(
+				//Header Skeleton
+				<div className="bg-primary-500 h-15 flex items-center justify-between px-5 lg:px-20">
+					<div className="flex gap-8">
+						<div className="w-10 h-10 bg-gray-200 rounded animate-pulse" />
+						<div className="hidden md:flex gap-7 items-center">
+						{Array(4)
+							.fill(0)
+							.map((_, idx) => (
+							<div key={idx} className="w-20 h-6 bg-gray-200 rounded animate-pulse" />
+							))}
+						</div>
+					</div>
+
+					<div className="flex gap-5 items-center">
+						<div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
+						<div className="w-8 h-8 bg-gray-200 rounded animate-pulse"></div>
+					</div>
+				</div>
+			)
+			)}
 
 			<main className="grow flex justify-center">
 				<Routes>
-					<Route path="/login" element={<Login setUser={setUser}/>} />
+					<Route path="/login" element={<Login setUser={setUser} setProfile={setProfile} />} />
             		<Route path="/" element={<Dashboard/>} />	
 					<Route path="/courses" element={<Course />} />
 					<Route path="/grades" element={<Grades/>} />
@@ -91,6 +117,7 @@ function AppContent() {
 			</main>
 
 			{!isLoginPage && <Footer />}
+			
 		</div>
 	);
 }

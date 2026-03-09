@@ -5,7 +5,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import Account from "./Account";
 
-function Header({ setUser, profile }) {
+function Header({ setUser, setProfile, profile }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -21,6 +21,7 @@ function Header({ setUser, profile }) {
 		} finally {
 			setLoading(false);
 			setUser(null);
+			setProfile(null)
 			setDropdownOpen(false);
 			setMenuOpen(false);
 			navigate("/login");
@@ -102,35 +103,52 @@ function Header({ setUser, profile }) {
 
 			{/* Right Section */}
 			<div className="flex gap-5 items-center select-none">
-				<div className="flex items-center mr-10 md:mr-0 cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)} ref={accountRef}>
-					<div className="overflow-hidden rounded-full  w-8">
-						<img src={profile.profile_image_url} alt="Default Profile"/>
+				{profile && (
+					<div
+					className="flex items-center mr-10 md:mr-0 cursor-pointer"
+					onClick={() => setDropdownOpen(!dropdownOpen)}
+					ref={accountRef}
+					>
+					<div className="overflow-hidden rounded-full w-8">
+						<img
+						src={profile?.profile_image_url || "/default_profile.jpg"}
+						alt="Default Profile"
+						/>
 					</div>
 					<div className="ml-1 w-5 h-5 text-white">
-					{dropdownOpen ? (
-						// Up arrow SVG
+						{dropdownOpen ? (
 						<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
 						>
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+							<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M5 15l7-7 7 7"
+							/>
 						</svg>
-					) : (
-						// Down arrow SVG
+						) : (
 						<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
 						>
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+							<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M19 9l-7 7-7-7"
+							/>
 						</svg>
-					)}
+						)}
 					</div>
 					<Account logout={logout} dropdownOpen={dropdownOpen} setDropdownOpen={setDropdownOpen} profile={profile}/>
-				</div>
+					</div>
+				)}
 			</div>
 
 			{/* Mobile Hamburger */}

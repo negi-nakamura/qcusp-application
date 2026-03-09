@@ -24,7 +24,7 @@ function Account({ logout, dropdownOpen, setDropdownOpen, profile }) {
 			<div>
 				{/* Profile Card */}
 				<div className="flex items-center w-full px-4 py-3 gap-3 bg-neutral-50 rounded-b-none rounded-t-lg">
-				<img src={profile.profile_image_url} alt={`${profile.first_name} ${profile.last_name}`} className="w-12 h-12 rounded-full object-cover border border-gray-300" />
+				<img src={profile?.profile_image_url || "/default_profile.jpg"} alt={`${profile.first_name} ${profile.last_name}`} className="w-12 h-12 rounded-full object-cover border border-gray-300" />
 				<div className="flex flex-col overflow-hidden">
 					<p className="font-semibold text-gray-800 truncate">{`${profile.first_name} ${profile.last_name}`}</p>
 					<p className="text-sm text-gray-500 truncate">{profile.student_number}</p>
