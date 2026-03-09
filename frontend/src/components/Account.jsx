@@ -16,7 +16,7 @@ function Account({ logout, dropdownOpen, setDropdownOpen, profile }) {
 	const closeDropdown = () => setDropdownOpen(false);
 
 	return (
-		<section className="absolute right-0 top-13.5 w-full max-w-[250px] sm:max-w-[360px] px-3 z-30" style={{ display: dropdownOpen ? "block" : "none" }} onClick={(e) => e.stopPropagation()}>
+		<section className="absolute right-0 top-13.5 w-full max-w-[350px] sm:max-w-[360px] px-3 z-30" style={{ display: dropdownOpen ? "block" : "none" }} onClick={(e) => e.stopPropagation()}>
 		<div className="bg-neutral-50 rounded-lg shadow-[0_0_10px_rgba(0,0,5,0.25)] overflow-hidden">
 
 			{/* MAIN MENU */}
