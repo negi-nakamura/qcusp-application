@@ -3,7 +3,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 
 function News() {
-	const limit = 5
+	const limit = 8
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);

@@ -83,7 +83,7 @@ function AppContent() {
 				//Header Skeleton
 				<div className="bg-primary-500 h-15 flex items-center justify-between px-5 lg:px-20">
 					<div className="flex gap-8">
-						<div className="w-10 h-10 bg-gray-200 rounded animate-pulse" />
+						<div className="w-10 h-10 bg-gray-200 rounded-4xl animate-pulse" />
 						<div className="hidden md:flex gap-7 items-center">
 						{Array(4)
 							.fill(0)
@@ -95,7 +95,7 @@ function AppContent() {
 
 					<div className="flex gap-5 items-center">
 						<div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
-						<div className="w-8 h-8 bg-gray-200 rounded animate-pulse"></div>
+						<div className="w-8 h-8 bg-gray-200 rounded animate-pulse md:hidden"></div>
 					</div>
 				</div>
 			)
@@ -117,7 +117,7 @@ function AppContent() {
 			</main>
 
 			{!isLoginPage && <Footer />}
-			
+
 		</div>
 	);
 }
